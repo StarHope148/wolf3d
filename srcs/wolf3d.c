@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   wolf3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/07 11:57:21 by jcanteau         ###   ########.fr       */
+/*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
+/*   Updated: 2019/11/07 16:52:21 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-int		ft_error(void)
+void	ft_init_env(t_env *wolf)
 {
-	ft_putendl_fd("an error occured", 2);
-	return (EXIT_FAILURE);
+	wolf->win_ptr = NULL;
+	wolf->img_ptr = NULL;
+	wolf->data = NULL;
+	wolf->width = WIDTH;
+	wolf->height = HEIGHT;
+	wolf->bpp = 0;
+	wolf->size_l = 0;
+	wolf->endian = 0;
 }
 
-int		ft_usage(void)
+int		ft_wolf3d(char *mapfile)
 {
-	ft_putendl_fd("usage: ./wolf3d [file.map]", 2);
-	return (EXIT_FAILURE);
-}
-
-int		main(int ac, char **av)
-{
-	if (ac != 2)
-		return (ft_usage());
-	if (ft_wolf3d(av[1]) == -1)
+	t_env	wolf;
+	
+	ft_init_env(&wolf);
+	(void)mapfile;
+	if (ft_mlx(&wolf) == -1)
 		return (-1);
 	return (0);
 }

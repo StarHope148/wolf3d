@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/07 11:24:57 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/07 16:57:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef WOLF3D_H
+# define WOLF3D_H
 
-# include <mlx.h>
+//# include <mlx.h>
+# include "../SDL2/include/SDL2/SDL.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <pthread.h>
 # include "../libft/libft.h"
-//# include "keys.h"
-//# include "colors.h"
+# include "keys.h"
+# include "colors.h"
 
 # define WIDTH 1000
 # define HEIGHT 800
@@ -53,9 +55,9 @@ typedef struct	s_point
 typedef struct	s_env
 {
 	t_point		mouse;
-	void		*mlx_ptr;
-	void		*win_ptr;
+	SDL_Window		*win_ptr;
 	void		*img_ptr;
+	SDL_Event	*event;
 	int			*data;
 	int			width;
 	int			height;
@@ -75,5 +77,9 @@ typedef struct	s_env
 	double		ymax;
 	int			n;
 }				t_env;
+
+int			ft_wolf3d(char *mapfile);
+int			ft_mlx(t_env *wolf);
+int			ft_key_hook(int keycode, t_env *wolf);
 
 #endif

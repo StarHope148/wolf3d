@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/19 16:21:05 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:03:51 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ typedef struct	s_env
 	SDL_Texture		*texture;
 	SDL_PixelFormat *format;
 	SDL_Event 		event;
-	int			width;
-	int			height;
+	int				width;
+	int				height;
 
 }				t_env;
 
 void		ft_wolf3d(char *mapfile);
 void		ft_sdl(t_env *wolf);
-int			ft_key_hook(int keycode, t_env *wolf);
+void		ft_key_hook(t_env *wolf);
+int			ft_exit(t_env *wolf, int exit_type);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2019/11/19 16:21:41 by jcanteau         ###   ########.fr        #
+#    Updated: 2019/11/19 17:00:39 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_NAME += colors.h
 SRC_NAME += main.c
 SRC_NAME += wolf3d.c
 SRC_NAME += sdl_start_up.c
-#SRC_NAME += key_hook.c
+SRC_NAME += key_hook.c
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

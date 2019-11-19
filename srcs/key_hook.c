@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/07 16:52:47 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:48:02 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,7 @@ int		ft_key_hook(int keycode, t_env *wolf)
 {
 	if (keycode == ESC)
 		ft_exit(wolf);
-	/* else if (keycode == MORE || keycode == LESS)
-		ft_iteration(wolf, keycode);
-	else if (keycode == UP_ARROW || keycode == DOWN_ARROW
-			|| keycode == LEFT_ARROW || keycode == RIGHT_ARROW)
-		ft_move(wolf, keycode);
-	else if (keycode == ONE_NUM_PAD || keycode == TWO_NUM_PAD)
-		ft_zoom(wolf, keycode);
-	else if (keycode == THREE_NUM_PAD)
-		ft_switch_color(wolf);
-	else if (keycode == ZERO_NUM_PAD)
-		ft_default(wolf);
-	else if (keycode == FIVE_NUM_PAD)
-		ft_switch_fractal(wolf); */
+
 
 	/* if (ft_print(wolf) == -1)
 		return (-1); */

@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2019/11/07 16:53:48 by jcanteau         ###   ########.fr        #
+#    Updated: 2019/11/19 16:21:41 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ INC_NAME += keys.h
 INC_NAME += colors.h
 
 SRC_NAME += main.c
-SRC_NAME += mlx_start_up.c
 SRC_NAME += wolf3d.c
-SRC_NAME += key_hook.c
+SRC_NAME += sdl_start_up.c
+#SRC_NAME += key_hook.c
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -36,8 +36,8 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 HEAD = $(addprefix $(INC_PATH), $(INC_NAME))
 LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 
-FRAMEWORK = -framework OpenGL -framework AppKit
-MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
+#FRAMEWORK = -framework OpenGL -framework AppKit
+#MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
 SDL2 = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0
 CFLAGS = -Wall -Wextra -Werror
 
@@ -67,7 +67,7 @@ re: fclean all
 
 debug:
 	make -C $(LIB_PATH)
-	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) $(SRC) $(LIB) $(MLXFLAG) $(FRAMEWORK)
+	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) $(SRC) $(LIB) $(SDL2)
 
 debug_clean:
 	$(RM) -rf a.out a.out.DSYM
@@ -77,6 +77,6 @@ norm:
 
 ubuntu: $(OBJ)
 	make -C $(LIB_PATH)
-	$(CC) $(CFLAGS) $(MLXFLAG) $(OBJ) $(LIB) -o $(NAME) -lmlx -lXext -lX11 -lm
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) `sdl2-config --cflags --libs`
 
 .PHONY: clean fclean re all debug debug_clean norm ubuntu

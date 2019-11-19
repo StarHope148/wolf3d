@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/07 11:57:21 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:19:44 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		main(int ac, char **av)
 {
 	if (ac != 2)
 		return (ft_usage());
-	if (ft_wolf3d(av[1]) == -1)
-		return (-1);
+	ft_wolf3d(av[1]);
 	return (0);
 }

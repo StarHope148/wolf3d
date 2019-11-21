@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/19 17:04:17 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:01:19 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				ft_exit(t_env *wolf, int exit_type)
 	if (wolf->window != NULL)
 		SDL_DestroyWindow(wolf->window);
 	SDL_Quit();
-	return(exit_type);
+	return (exit_type);
 }
 
 void			ft_init_window_renderer(t_env *wolf)
@@ -72,8 +72,6 @@ void			ft_sdl(t_env *wolf)
 {
 	ft_init_window_renderer(wolf);
 	ft_init_renderer_texture(wolf);
-	
 	ft_key_hook(wolf);
-
 	ft_exit(wolf, EXIT_SUCCESS);
 }

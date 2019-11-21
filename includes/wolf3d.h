@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/19 17:03:51 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:25:35 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include <pthread.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "keys.h"
 # include "colors.h"
@@ -43,6 +43,13 @@ typedef struct	s_point
 	int			y;
 }				t_point;
 
+typedef struct	s_map
+{
+	size_t		nbl;
+	size_t		nbcol;
+	char		**map;
+}				t_map;
+
 typedef struct	s_env
 {
 	SDL_Window 		*window;
@@ -50,6 +57,7 @@ typedef struct	s_env
 	SDL_Texture		*texture;
 	SDL_PixelFormat *format;
 	SDL_Event 		event;
+	t_map			mapdata;
 	int				width;
 	int				height;
 

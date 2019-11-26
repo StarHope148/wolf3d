@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/21 16:25:35 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/26 17:05:33 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_map
 {
 	size_t		nbl;
 	size_t		nbcol;
+	size_t		nbl_cur;
 	char		**map;
 }				t_map;
 

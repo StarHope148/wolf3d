@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/26 17:42:56 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/26 17:55:08 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,9 @@ char		**ft_malloc_tab(t_env *wolf)
 
 int		ft_retrieve_data(t_env *wolf, char *line)
 {
-	//int		i;
-
-	if ((wolf->mapdata.map = ft_malloc_tab(wolf)) == NULL)
-		return (-1);
-	/* i = 0;
-	while (line[i])
-	{
-		wolf->mapdata.map[wolf->mapdata.nbl_cur][i] = line[i];
-		i++;
-	} */
+	if (wolf->mapdata.map == NULL)
+		if ((wolf->mapdata.map = ft_malloc_tab(wolf)) == NULL)
+			return (-1);
 	ft_strcpy(wolf->mapdata.map[wolf->mapdata.nbl_cur], line);
 	wolf->mapdata.nbl_cur++;
 	return (0);
@@ -95,19 +88,11 @@ void	ft_fill_map(t_env *wolf, int fd)
 		exit(EXIT_FAILURE);
 	}
 
-	
+	//DEBUG MAP DISPLAY
 	size_t i = 0;
-	size_t j = 0;
 	while (i < wolf->mapdata.nbl)
 	{
-		printf("map[%zu] = ", i);
-		j = 0;
-		while (j < wolf->mapdata.nbcol)
-		{
-			printf("%c", wolf->mapdata.map[i][j]);
-			j++;
-		}
-		printf("\n");
+		printf("map[%zu] = %s\n", i, wolf->mapdata.map[i]);
 		i++;
 	}
 }

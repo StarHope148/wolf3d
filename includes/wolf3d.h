@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/26 17:05:33 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:48:39 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ typedef struct	s_env
 void		ft_wolf3d(char *mapfile);
 void		ft_sdl(t_env *wolf);
 void		ft_key_hook(t_env *wolf);
-int			ft_exit(t_env *wolf, int exit_type);
+void		ft_exit(t_env *wolf, int exit_type, char *message);
 
 #endif

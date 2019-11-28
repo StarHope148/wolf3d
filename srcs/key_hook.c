@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/19 17:05:06 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:47:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_key_hook(t_env *wolf)
 		{
 			if (wolf->event.key.keysym.sym == SDLK_ESCAPE)
 			{
-				ft_exit(wolf, EXIT_SUCCESS);
+				ft_exit(wolf, EXIT_SUCCESS, NULL);
 				break;
 			}
 			else
@@ -29,7 +29,7 @@ void	ft_key_hook(t_env *wolf)
 		}
 		else if (wolf->event.type == SDL_QUIT)
 		{
-			ft_exit(wolf, EXIT_SUCCESS);
+			ft_exit(wolf, EXIT_SUCCESS, NULL);
 			break;
 		}
 	}

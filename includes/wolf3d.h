@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/28 15:48:39 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/11/28 17:28:57 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 # include "keys.h"
 # include "colors.h"
 
-# define WIDTH 1000
-# define HEIGHT 800
+# define WIDTH 320
+# define HEIGHT 200
+# define RAYDIST WIDTH / 60
 
 # define MOVE_SPEED 0.05
 # define ZOOM_SPEED 1.06
@@ -51,6 +52,14 @@ typedef struct	s_map
 	char		**map;
 }				t_map;
 
+typedef struct	s_camera
+{
+	double		x;
+	double		y;
+	double		angle;
+	double		dist;
+}				t_camera;
+
 typedef struct	s_env
 {
 	SDL_Window 		*window;
@@ -59,6 +68,7 @@ typedef struct	s_env
 	SDL_PixelFormat *format;
 	SDL_Event 		event;
 	t_map			mapdata;
+	t_camera		cam;
 	int				width;
 	int				height;
 

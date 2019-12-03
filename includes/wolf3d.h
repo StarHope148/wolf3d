@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/28 17:28:57 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:31:23 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@
 # include "keys.h"
 # include "colors.h"
 
-# define WIDTH 320
-# define HEIGHT 200
+# define WIDTH 800
+# define HEIGHT 600
 # define RAYDIST WIDTH / 60
+
+#define BLOCK 64
 
 # define MOVE_SPEED 0.05
 # define ZOOM_SPEED 1.06
@@ -78,5 +80,6 @@ void		ft_wolf3d(char *mapfile);
 void		ft_sdl(t_env *wolf);
 void		ft_key_hook(t_env *wolf);
 void		ft_exit(t_env *wolf, int exit_type, char *message);
+void		ft_print(t_env *wolf);
 
 #endif

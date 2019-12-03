@@ -6,11 +6,11 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/11/28 17:26:58 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/12/03 16:09:13 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/wolf3d.h"
+#include "wolf3d.h"
 
 char		**ft_malloc_tab(t_env *wolf)
 {
@@ -166,7 +166,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.x = 0;
 	wolf->cam.y = 0;
 	wolf->cam.angle = 0;
-	wolf->cam.dist = (WIDTH / 2 )/ tan(0.57735026919)  //tan(30°)
+	wolf->cam.dist = (WIDTH / 2 )/ tan(0.57735026919);  //tan(30°)
 }
 
 void	ft_wolf3d(char *mapfile)

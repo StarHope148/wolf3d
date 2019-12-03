@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2019/11/19 17:00:39 by jcanteau         ###   ########.fr        #
+#    Updated: 2019/12/03 16:34:55 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC_NAME += main.c
 SRC_NAME += wolf3d.c
 SRC_NAME += sdl_start_up.c
 SRC_NAME += key_hook.c
+SRC_NAME += image.c
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -53,7 +54,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
 	mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) -o $@ -c $< 
+	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< 
 
 clean:
 	make clean -C $(LIB_PATH)
@@ -67,7 +68,7 @@ re: fclean all
 
 debug:
 	make -C $(LIB_PATH)
-	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) $(SRC) $(LIB) $(SDL2)
+	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2)
 
 debug_clean:
 	$(RM) -rf a.out a.out.DSYM

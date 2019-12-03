@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/12/03 17:37:10 by jcanteau         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:55:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_print(t_env *wolf)
 			if (wolf->mapdata.map[i][j] == '1')
 				while (done == 0)
 				{
-					pixels[y * WIDTH + x] = 0x00FF0000;
+					pixels[y * WIDTH + x] = LIME;
 					//pixels[(y + BLOCK)* WIDTH + x + BLOCK] = 0xFF000000;  //<--- opposite corner position of block
 					x++;
 					if (x > def_x + BLOCK)
@@ -56,8 +56,7 @@ void	ft_print(t_env *wolf)
 			else if (wolf->mapdata.map[i][j] == '0')
 				while (done == 0)
 				{
-					pixels[y * WIDTH + x] = 0x0000FF00;
-					//pixels[(y + BLOCK)* WIDTH + x + BLOCK] = 0xFF000000;  //<--- opposite corner position of block
+					pixels[y * WIDTH + x] = GRAY;
 					x++;
 					if (x > def_x + BLOCK)
 					{

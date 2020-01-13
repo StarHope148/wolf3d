@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/12/03 16:09:13 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/13 14:53:18 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ void	ft_init_env(t_env *wolf)
 	wolf->renderer = NULL;
 	wolf->texture = NULL;
 	wolf->format = NULL;
-	//wolf->event = NULL;
 	
 	wolf->width = WIDTH;
 	wolf->height = HEIGHT;
@@ -167,6 +166,15 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.y = 0;
 	wolf->cam.angle = 0;
 	wolf->cam.dist = (WIDTH / 2 )/ tan(0.57735026919);  //tan(30°)
+	wolf->cam.velx = 0;
+	wolf->cam.vely = 0;
+
+	wolf->vec.posX = 0;
+	wolf->vec.posY = 0;
+	wolf->vec.dirX = 0;
+	wolf->vec.dirY = 0;
+	wolf->vec.planeX = 0; 
+	wolf->vec.planeY = 0;
 }
 
 void	ft_wolf3d(char *mapfile)

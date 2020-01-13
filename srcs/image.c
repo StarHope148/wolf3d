@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/12/03 17:55:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/13 14:22:11 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_print(t_env *wolf)
 {
+	//###### printing 2D map view from above + red dot for camera location ######
+	//---------------------------------------------------------------------------------------------------------
 	int	i;
 	int	j;
 
@@ -70,8 +72,26 @@ void	ft_print(t_env *wolf)
 		}
 		i++;
 	}
+	//---------------------------------------------------------------------------------------------------------
+
+/* 	// ###### RAYTRACER ###### 
+	int	cur = 0;
+	
+	while (cur <= wolf->width)
+	{
+		float cameraX = (2 * cur / wolf->width) - 1;// position de la colonne par rapport au centre de l’écran
+		float rayPosX = wolf->cam.x;// position de départ du rayon sur X
+		float rayPosY = wolf->cam.y;// position de départ du rayon sur Y
+		float rayDirX = wolf->vec.dirX + wolf->vec.planeX * cameraX;// direction du rayon sur X
+		float rayDirY = wolf->vec.dirY + wolf->vec.planeY * cameraX;// direction du rayon sur Y
+
+	} */
 
 	SDL_UnlockTexture(wolf->texture);
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
+
+	SDL_RenderDrawPoint(wolf->renderer, wolf->cam.x, wolf->cam.y);
+	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
+	
 	SDL_RenderPresent(wolf->renderer);
 }

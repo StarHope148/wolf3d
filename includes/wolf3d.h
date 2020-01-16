@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/13 14:20:24 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/16 16:56:45 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "keys.h"
 # include "colors.h"
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 640
+# define HEIGHT 480
 # define RAYDIST WIDTH / 60
 
 #define BLOCK 16
@@ -83,6 +83,7 @@ typedef struct	s_env
 	SDL_Event 		event;
 	t_map			mapdata;
 	t_camera		cam;
+	Uint32			*pixels;
 	t_vector		vec;
 	int				width;
 	int				height;

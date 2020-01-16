@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/13 12:31:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:06:21 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	ft_key_hook(t_env *wolf)
 			ft_exit(wolf, EXIT_SUCCESS, NULL);
 			break;
 		}
+	
+		//wolf->pixels[(int)wolf->cam.y * WIDTH + (int)wolf->cam.x] == GRAY
 
 		if (wolf->cam.velx == 1)
 			wolf->cam.x += MOVE_SPEED;

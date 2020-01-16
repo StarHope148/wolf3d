@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/12/03 16:09:07 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:03:51 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void				ft_exit(t_env *wolf, int exit_type, char *message)
 		SDL_DestroyRenderer(wolf->renderer);
 	if (wolf->window != NULL)
 		SDL_DestroyWindow(wolf->window);
+	/* if (wolf->pixels != NULL)
+		free(wolf->pixels); */
 	SDL_Quit();
 	if (message != NULL)
 		perror(message);

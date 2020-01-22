@@ -1,4 +1,4 @@
-- segfault if minimaps drawing exceeds WIDTH or HEIGHT of window
+- segfault if minimaps drawing exceeds WIDTH or HEIGHT of window (trying to access pixel offscreen)
 - check leaks when exiting :
 	__attribute__((destructor)) void no_end(void);
 	void    no_end(void)
@@ -6,3 +6,4 @@
 		while (1);
 	}
 - rework controls key_hook()
+- weird stuff during parsing causing wrong tab format

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/22 12:51:25 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:48:31 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,42 +23,46 @@ void	ft_key_hook(t_env *wolf)
 			if (wolf->event.key.keysym.sym == SDLK_ESCAPE)
 				ft_exit(wolf, EXIT_SUCCESS, NULL);
 			else if (wolf->event.key.keysym.sym == SDLK_w)
-				wolf->cam.vely = -1;
+				wolf->cam.vel_y = -1;
 			else if (wolf->event.key.keysym.sym == SDLK_a)
-				wolf->cam.velx = -1;
+				wolf->cam.vel_x = -1;
 			else if (wolf->event.key.keysym.sym == SDLK_s)
-				wolf->cam.vely = 1;
+				wolf->cam.vel_y = 1;
 			else if (wolf->event.key.keysym.sym == SDLK_d)
-				wolf->cam.velx = 1;
+				wolf->cam.vel_x = 1;
 			else if (wolf->event.key.keysym.sym == SDLK_x)
-				printf("cam.x = %.2f\tcam.y = %.2f\n", wolf->cam.x, wolf->cam.y);	//DEBUG			
+			{
+				printf("---------------------\n");
+				printf("cam_x = %.2f\tcam_y = %.2f\ncase[%d][%d]\tmap_x = %d map_y = %d\n", wolf->cam.pos_x, wolf->cam.pos_y, wolf->ray.map_x, wolf->ray.map_y, wolf->ray.map_x, wolf->ray.map_y);	//DEBUG			
+				printf("case = %c\n", wolf->mapdata.map[wolf->ray.map_x][wolf->ray.map_y]);
+			}
 			else
 				printf("keycode = %d\n", wolf->event.key.keysym.sym);		//DEBUG
 		}
 		else if (wolf->event.type == SDL_KEYUP)
 		{
 			if (wolf->event.key.keysym.sym == SDLK_w)
-				wolf->cam.vely = 0;
+				wolf->cam.vel_y = 0;
 			else if (wolf->event.key.keysym.sym == SDLK_a)
-				wolf->cam.velx = 0;
+				wolf->cam.vel_x = 0;
 			else if (wolf->event.key.keysym.sym == SDLK_s)
-				wolf->cam.vely = 0;
+				wolf->cam.vel_y = 0;
 			else if (wolf->event.key.keysym.sym == SDLK_d)
-				wolf->cam.velx = 0;
+				wolf->cam.vel_x = 0;
 		}
 		else if (wolf->event.type == SDL_QUIT)
 			ft_exit(wolf, EXIT_SUCCESS, NULL);
 	
 		//wolf->pixels[(int)wolf->cam.y * WIDTH + (int)wolf->cam.x] == GRAY
 
-		if (wolf->cam.velx == 1)
-			wolf->cam.x += MOVE_SPEED;
-		if (wolf->cam.velx == -1)
-			wolf->cam.x -= MOVE_SPEED;
-		if (wolf->cam.vely == 1)
-			wolf->cam.y += MOVE_SPEED;
-		if (wolf->cam.vely == -1)
-			wolf->cam.y -= MOVE_SPEED;
+		if (wolf->cam.vel_x == 1)
+			wolf->cam.pos_x += MOVE_SPEED;
+		if (wolf->cam.vel_x == -1)
+			wolf->cam.pos_x -= MOVE_SPEED;
+		if (wolf->cam.vel_y == 1)
+			wolf->cam.pos_y += MOVE_SPEED;
+		if (wolf->cam.vel_y == -1)
+			wolf->cam.pos_y -= MOVE_SPEED;
 		ft_print(wolf);
 	}
 }

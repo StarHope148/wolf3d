@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/22 13:05:11 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:17:28 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void			ft_sdl(t_env *wolf)
 	ft_init_window_renderer(wolf);
 	ft_init_renderer_texture(wolf);
 	ft_print(wolf);
-	printf("TEST\n");
 	ft_key_hook(wolf);
 	ft_exit(wolf, EXIT_SUCCESS, NULL);
 }

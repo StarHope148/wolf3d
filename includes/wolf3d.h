@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/22 13:05:58 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:28:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,44 @@
 # include "keys.h"
 # include "colors.h"
 
-# define WIDTH 640
-# define HEIGHT 480
+# define WIDTH 480
+# define HEIGHT 360
 # define RAYDIST WIDTH / 60
 
 # define BLOCK 16
 
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 0.005
 # define ZOOM_SPEED 1.06
 # define MOUSE_S 0.005
 
 # define WALL '#'
 # define EMPTY '.'
 
-typedef enum	e_control
+/* typedef enum	e_control
 {
 	FORWARD,
 	STRAFE_RIGHT,
 	BACKWARD,
 	STRAFE_LEFT,
 	ROTATE
-}				t_control;
+}				t_control; */
 
-typedef struct	s_vector
+typedef struct	s_ray
 {
-	float 		posX;
-	float 		posY;
-	float 		dirX;
-	float 		dirY;
-	float		planeX;
-	float		planeY;
-}				t_vector;
+	double		camera_x;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		length_x;
+	double		length_y;
+	double		delta_x;
+	double		delta_y;
+	int			map_x;
+	int			map_y;
+	ssize_t		step_x;
+	ssize_t		step_y;
+}				t_ray;
 
 typedef struct	s_point
 {
@@ -62,20 +69,22 @@ typedef struct	s_point
 
 typedef struct	s_map
 {
-	size_t		nbl;
-	size_t		nbcol;
-	size_t		nbl_cur;
+	int			nbl;
+	int			nbcol;
+	size_t		cur_line;
 	char		**map;
 }				t_map;
 
 typedef struct	s_camera
 {
-	double		x;
-	double		y;
-	double		angle;
-	double		dist;
-	ssize_t		velx;
-	ssize_t		vely;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	ssize_t		vel_x;
+	ssize_t		vel_y;
 }				t_camera;
 
 typedef struct	s_env
@@ -88,7 +97,7 @@ typedef struct	s_env
 	t_map			mapdata;
 	t_camera		cam;
 	Uint32			*pixels;
-	t_vector		vec;
+	t_ray			ray;
 }				t_env;
 
 void		ft_wolf3d(char *mapfile);

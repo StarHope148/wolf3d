@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/22 13:03:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:36:07 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 char		**ft_malloc_tab(t_env *wolf)
 {
 	char	**tab;
-	size_t		i;
+	int			i;
 
-	if ((tab = (char **)ft_memalloc(sizeof(char *)
+	if ((tab = (char **)malloc(sizeof(char *)
 			* wolf->mapdata.nbl)) == NULL)
 		return (NULL);
 	i = 0;
 	while (i < wolf->mapdata.nbl)
 	{
-		if ((tab[i] = (char *)ft_memalloc(sizeof(char)
+		if ((tab[i] = (char *)malloc(sizeof(char)
 				* wolf->mapdata.nbcol)) == NULL)
 			return (NULL);
 		i++;
@@ -36,8 +36,9 @@ int		ft_retrieve_data(t_env *wolf, char *line)
 	if (wolf->mapdata.map == NULL)
 		if ((wolf->mapdata.map = ft_malloc_tab(wolf)) == NULL)
 			return (-1);
-	ft_strcpy(wolf->mapdata.map[wolf->mapdata.nbl_cur], line);
-	wolf->mapdata.nbl_cur++;
+	ft_strcpy(wolf->mapdata.map[wolf->mapdata.cur_line], line);
+	wolf->mapdata.map[wolf->mapdata.cur_line][ft_strlen(line)] = '\0';
+	wolf->mapdata.cur_line++;
 	return (0);
 }
 
@@ -89,10 +90,11 @@ void	ft_fill_map(t_env *wolf, int fd)
 	}
 
 	//DEBUG MAP DISPLAY
-	size_t i = 0;
+	int i = 0;
+	printf("map_nbl = %d\tmap_nbcol = %d\n", wolf->mapdata.nbl, wolf->mapdata.nbcol);
 	while (i < wolf->mapdata.nbl)
 	{
-		printf("map[%zu] =\t%s\n", i, wolf->mapdata.map[i]);
+		printf("map[%d] =\t%s\n", i, wolf->mapdata.map[i]);
 		i++;
 	}
 }
@@ -157,21 +159,27 @@ void	ft_init_env(t_env *wolf)
 
 	wolf->mapdata.nbcol = 0;
 	wolf->mapdata.nbl = 0;
-	wolf->mapdata.nbl_cur = 0;
+	wolf->mapdata.cur_line = 0;
 	wolf->mapdata.map = NULL;
 
-	wolf->cam.x = BLOCK * 1.5;
-	wolf->cam.y = BLOCK * 1.5;
-	wolf->cam.angle = 0;
-	wolf->cam.velx = 0;
-	wolf->cam.vely = 0;
+	wolf->cam.pos_x = 1;
+	wolf->cam.pos_y = 1;
+	wolf->cam.dir_x = -1;
+	wolf->cam.dir_y = 0;
+	wolf->cam.plane_x = 0;
+	wolf->cam.plane_y = 1;
+	wolf->cam.vel_x = 0;
+	wolf->cam.vel_y = 0;
 
-	wolf->vec.posX = 0;
-	wolf->vec.posY = 0;
-	wolf->vec.dirX = -1;
-	wolf->vec.dirY = 0;
-	wolf->vec.planeX = 0; 
-	wolf->vec.planeY = 0.66;
+	wolf->ray.camera_x = 0;
+	wolf->ray.pos_x = 0;
+	wolf->ray.pos_y = 0;
+	wolf->ray.dir_x = 0;
+	wolf->ray.dir_y = 0;
+	wolf->ray.length_x = 0;
+	wolf->ray.length_y = 0;
+	wolf->ray.map_x = 0;
+	wolf->ray.map_y = 0;
 }
 
 void	ft_wolf3d(char *mapfile)

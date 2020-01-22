@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/16 17:01:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:03:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		ft_check_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '0' && line[i] != '1')
+		if (line[i] != '.' && line[i] != '#')
 			return (-1);
 		i++;
 	}
@@ -154,9 +154,6 @@ void	ft_init_env(t_env *wolf)
 	wolf->texture = NULL;
 	wolf->format = NULL;
 	wolf->pixels = NULL;
-	
-	wolf->width = WIDTH;
-	wolf->height = HEIGHT;
 
 	wolf->mapdata.nbcol = 0;
 	wolf->mapdata.nbl = 0;

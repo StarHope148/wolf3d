@@ -1,0 +1,8 @@
+- segfault if minimaps drawing exceeds WIDTH or HEIGHT of window
+- check leaks when exiting :
+	__attribute__((destructor)) void no_end(void);
+	void    no_end(void)
+	{
+		while (1);
+	}
+- rework controls key_hook()

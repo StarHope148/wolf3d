@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/16 16:56:45 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:05:58 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,23 @@
 # define HEIGHT 480
 # define RAYDIST WIDTH / 60
 
-#define BLOCK 16
+# define BLOCK 16
 
-# define MOVE_SPEED 0.2
+# define MOVE_SPEED 0.1
 # define ZOOM_SPEED 1.06
 # define MOUSE_S 0.005
 
-/* typedef enum	e_color_mod
+# define WALL '#'
+# define EMPTY '.'
+
+typedef enum	e_control
 {
-	BLUE_MOD,
-	RED_MOD,
-	GREEN_MOD,
-	RAND_MOD
-}				t_color_mod; */
+	FORWARD,
+	STRAFE_RIGHT,
+	BACKWARD,
+	STRAFE_LEFT,
+	ROTATE
+}				t_control;
 
 typedef struct	s_vector
 {
@@ -85,9 +89,6 @@ typedef struct	s_env
 	t_camera		cam;
 	Uint32			*pixels;
 	t_vector		vec;
-	int				width;
-	int				height;
-
 }				t_env;
 
 void		ft_wolf3d(char *mapfile);

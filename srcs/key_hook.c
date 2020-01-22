@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/16 17:06:21 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:51:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	ft_key_hook(t_env *wolf)
 		if (wolf->event.type == SDL_KEYDOWN)
 		{
 			if (wolf->event.key.keysym.sym == SDLK_ESCAPE)
-			{
 				ft_exit(wolf, EXIT_SUCCESS, NULL);
-				break;
-			}
 			else if (wolf->event.key.keysym.sym == SDLK_w)
 				wolf->cam.vely = -1;
 			else if (wolf->event.key.keysym.sym == SDLK_a)
@@ -50,10 +47,7 @@ void	ft_key_hook(t_env *wolf)
 				wolf->cam.velx = 0;
 		}
 		else if (wolf->event.type == SDL_QUIT)
-		{
 			ft_exit(wolf, EXIT_SUCCESS, NULL);
-			break;
-		}
 	
 		//wolf->pixels[(int)wolf->cam.y * WIDTH + (int)wolf->cam.x] == GRAY
 

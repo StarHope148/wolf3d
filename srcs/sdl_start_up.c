@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/16 17:03:51 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:05:11 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void			ft_init_window_renderer(t_env *wolf)
 	wolf->window = SDL_CreateWindow("WOLF3D",
 					SDL_WINDOWPOS_CENTERED,
 					SDL_WINDOWPOS_CENTERED,
-					wolf->width,
-					wolf->height,
+					WIDTH,
+					HEIGHT,
 					0);
 	if (wolf->window == NULL)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateWindow() ");
@@ -65,6 +65,7 @@ void			ft_sdl(t_env *wolf)
 	ft_init_window_renderer(wolf);
 	ft_init_renderer_texture(wolf);
 	ft_print(wolf);
+	printf("TEST\n");
 	ft_key_hook(wolf);
 	ft_exit(wolf, EXIT_SUCCESS, NULL);
 }

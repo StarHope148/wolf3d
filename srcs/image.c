@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/16 16:57:07 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/22 13:00:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_print(t_env *wolf)
 			y = i * BLOCK;
 			def_x = x;
 			def_y = y;
-			if (wolf->mapdata.map[i][j] == '1')
+			if (wolf->mapdata.map[i][j] == WALL)
 				while (done == 0)
 				{
 					wolf->pixels[y * WIDTH + x] = LIME;
@@ -54,7 +54,7 @@ void	ft_print(t_env *wolf)
 					if (y > def_y + BLOCK)
 						done = 1;
 				}
-			else if (wolf->mapdata.map[i][j] == '0')
+			else if (wolf->mapdata.map[i][j] == EMPTY)
 				while (done == 0)
 				{
 					wolf->pixels[y * WIDTH + x] = GRAY;
@@ -74,8 +74,11 @@ void	ft_print(t_env *wolf)
 	//---------------------------------------------------------------------------------------------------------
 
 	// ###### RAYTRACER ###### 
-	
-
+	/* int		xcur = 0;
+	while (xcur < WIDTH)
+	{
+		xcur++;
+	} */
 	//---------------------------------------------------------------------------------------------------------
 
 	// ###### DISPLAYING ######

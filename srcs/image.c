@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/22 18:31:26 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/28 17:49:36 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print(t_env *wolf)
 {
-	//###### printing 2D map view from above + red dot for camera location ######
+	
 	int	i;
 	int	j;
 
@@ -29,6 +29,68 @@ void	ft_print(t_env *wolf)
 	
 	SDL_LockTexture(wolf->texture, NULL, &tmp, &pitch);
 	wolf->pixels = tmp;
+	
+	//---------------------------------------------------------------------------------------------------------
+
+	// ###### RAYTRACER ###### 
+
+	int		xRender;
+	int		yRender;
+	double 	EyeX;
+	double 	EyeY;
+	int		TestX;
+	int		TestY;
+
+	xRender = 0;
+	while (xRender < WIDTH)
+	{
+		double	RayAngle = (wolf->cam.angle - wolf->cam.fov / 2.0) + ((double)xRender / (double)WIDTH) * wolf->cam.fov;
+		double	distanceToWall = 0;
+		int		hitWall = 0;
+
+		EyeX = sin(RayAngle);
+		EyeY = cos(RayAngle);
+
+		while (hitWall == 0 && distanceToWall < MAX_DEPTH)
+		{
+			distanceToWall += PRECISION;
+
+			TestX = (int)(wolf->cam.pos_x + EyeX * distanceToWall);
+			TestY = (int)(wolf->cam.pos_y + EyeY * distanceToWall);
+
+			if (TestX < 0 || TestX >= wolf->mapdata.nbcol || TestY < 0 || TestY >= wolf->mapdata.nbl)
+			{
+				hitWall = 1;
+				distanceToWall = MAX_DEPTH;
+			}
+			else
+			{
+				if (wolf->mapdata.map[TestY][TestX] == WALL)
+					hitWall = 1; 
+			}
+		}
+
+		int Ceiling = (double)(HEIGHT / 1.75) - HEIGHT / ((double)distanceToWall);
+		int Floor = HEIGHT - Ceiling;
+
+		//printf("for xRender = %d\tCeiling = %d\tFloor = %d\n", xRender, Ceiling, Floor);
+		yRender = 0;
+		while (yRender < HEIGHT)
+		{
+			if (yRender < Ceiling) // UP
+				wolf->pixels[yRender * WIDTH + xRender] = DODGER_BLUE;
+			else if (yRender >= Ceiling && yRender <= Floor) // WALL
+				wolf->pixels[yRender * WIDTH + xRender] = SILVER;
+			else  //DOWN
+				wolf->pixels[yRender * WIDTH + xRender] = DARK_GREEN;
+			yRender++;
+		}
+		yRender = 0;
+		xRender++;
+	}
+
+	//---------------------------------------------------------------------------------------------------------
+	//###### printing 2D map view from above + red dot for camera location ######
 	i = 0;
 	while (i < (int)wolf->mapdata.nbl)
 	{
@@ -71,106 +133,11 @@ void	ft_print(t_env *wolf)
 		}
 		i++;
 	}
-	//---------------------------------------------------------------------------------------------------------
+	
+	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
+	//SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x, wolf->cam.pos_y, wolf->cam.pos_x + wolf->cam.dir_x * 10, wolf->cam.pos_y + wolf->cam.dir_y * 10);
+	
 
-	// ###### RAYTRACER ###### 
-	int		screen_column_x = 0;
-	int		hit = 0;
-	int		side = 0;
-	double	perpWallDist = 0;
-	double	hauteurLigne = 0;
-	int		drawStart = 0;
-	int		drawEnd = 0;
-
-	while (screen_column_x < WIDTH)
-	{
-		wolf->ray.camera_x = (2 * screen_column_x / WIDTH) - 1;
-		wolf->ray.pos_x = wolf->cam.pos_x;
-		wolf->ray.pos_y = wolf->cam.pos_y;
-		wolf->ray.dir_x = wolf->cam.dir_x + wolf->cam.plane_x * wolf->ray.camera_x;
-		wolf->ray.dir_y = wolf->cam.dir_y + wolf->cam.plane_y * wolf->ray.camera_x;
-		wolf->ray.map_x = (int)wolf->ray.pos_x;
-		wolf->ray.map_y = (int)wolf->ray.pos_y;
-		wolf->ray.delta_x = sqrt(1 + (wolf->ray.dir_y * wolf->ray.dir_y) / (wolf->ray.dir_x * wolf->ray.dir_x));
-		wolf->ray.delta_y = sqrt(1 + (wolf->ray.dir_x * wolf->ray.dir_x) / (wolf->ray.dir_y * wolf->ray.dir_y));
-		if (wolf->ray.dir_x < 0)
-		{
-			wolf->ray.step_x = -1;
-			wolf->ray.length_x = (wolf->ray.pos_x - wolf->ray.map_x) * wolf->ray.delta_x;
-		}
-		else
-		{
-			wolf->ray.step_x = 1;
-			wolf->ray.length_x = (wolf->ray.map_x + 1 - wolf->ray.pos_x) * wolf->ray.delta_x;
-
-		}
-		if (wolf->ray.dir_y < 0)
-		{
-			wolf->ray.step_y = -1;
-			wolf->ray.length_y = (wolf->ray.pos_y - wolf->ray.map_y) * wolf->ray.delta_y;
-		}
-		else
-		{
-			wolf->ray.step_y = 1;
-			wolf->ray.length_y = (wolf->ray.map_y + 1 - wolf->ray.pos_y) * wolf->ray.delta_y;
-		}
-		while (hit == 0)
-		{
-			if (wolf->ray.length_x < wolf->ray.length_y)
-			{
-				wolf->ray.length_x += wolf->ray.delta_x;
-				wolf->ray.map_x += wolf->ray.step_x;
-				side = 0;
-			}
-			else
-			{
-				wolf->ray.length_y += wolf->ray.delta_y;
-				wolf->ray.map_y += wolf->ray.step_y;
-				side = 1;
-			}
-
-			//few check to avoid segfault
-			if (wolf->ray.map_x >= wolf->mapdata.nbcol)
-				wolf->ray.map_x = wolf->mapdata.nbcol - 1;
-			else if (wolf->ray.map_x < 0)
-				wolf->ray.map_x = 0;
-			if (wolf->ray.map_y >= wolf->mapdata.nbl)
-				wolf->ray.map_y = wolf->mapdata.nbl - 1;
-			else if (wolf->ray.map_y < 0)
-				wolf->ray.map_y = 0;
-
-			if (wolf->mapdata.map[wolf->ray.map_y][wolf->ray.map_x] == WALL)
-				hit = 1; //to break the loop
-		}
-
-		// Optical correction (fixing fish-eye effect)
-		if (side == 0)
-			perpWallDist = fabs((wolf->ray.map_x - wolf->ray.pos_x + (1 - wolf->ray.step_x) / 2) / wolf->ray.dir_x);
-		else
-			perpWallDist = fabs((wolf->ray.map_y - wolf->ray.pos_y + (1 - wolf->ray.step_y) / 2) / wolf->ray.dir_y);
-
-		// Calculate height of column to draw on screen
-		hauteurLigne = fabs((double)HEIGHT / perpWallDist);
-		drawStart = (int)(-hauteurLigne / 2 + HEIGHT / 2);
-		drawEnd = (int)(hauteurLigne / 2 + HEIGHT / 2);
-		if (drawStart < BLOCK * wolf->mapdata.nbl)
-			drawStart = BLOCK* wolf->mapdata.nbl;
-		if (drawEnd > HEIGHT)
-			drawEnd = HEIGHT - 1;
-
-		// Filling pixels
-		int		cur_height = drawStart;
-		while (cur_height < drawEnd)
-		{
-			if (side == 1)
-				wolf->pixels[cur_height * WIDTH + screen_column_x] = WHITE;
-			else
-				wolf->pixels[cur_height * WIDTH + screen_column_x] = SILVER;
-			cur_height++;
-		}
-		
-		screen_column_x++;
-	}
 	//---------------------------------------------------------------------------------------------------------
 
 	// ###### DISPLAYING ######
@@ -178,9 +145,9 @@ void	ft_print(t_env *wolf)
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
 
 	//SDL_RenderDrawPoint(wolf->renderer, wolf->cam.pos_x, wolf->cam.pos_y);
-	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
 	
-	SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK, BLOCK, BLOCK); //RAY from cam
+	SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK,
+						(wolf->cam.pos_x + sin(wolf->cam.angle)) * BLOCK, (wolf->cam.pos_y + cos(wolf->cam.angle)) * BLOCK); //RAY from cam
 
 	SDL_RenderPresent(wolf->renderer);
 }

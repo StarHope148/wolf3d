@@ -6,4 +6,5 @@
 		while (1);
 	}
 - rework controls key_hook()
+- strafing controls not working
 - weird stuff during parsing causing wrong tab format

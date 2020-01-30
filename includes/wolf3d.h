@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 17:14:25 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:15:52 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <math.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
-# include "keys.h"
 # include "colors.h"
 
 # define WIDTH 1000

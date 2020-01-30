@@ -6,14 +6,13 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/01/30 12:41:35 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/01/30 17:16:19 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3d
 
 INC_NAME += wolf3d.h
-INC_NAME += keys.h
 INC_NAME += colors.h
 
 SRC_NAME += main.c

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 14:42:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:00:24 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	ft_key_hook(t_env *wolf)
 
 		if (wolf->cam.strafe_left_right == 1)
 		{
-			wolf->cam.pos_x += cos(-wolf->cam.angle) * MOVE_SPEED;
-			wolf->cam.pos_y += sin(-wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_x += cos(wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_y -= sin(wolf->cam.angle) * MOVE_SPEED;
 		}
 		if (wolf->cam.strafe_left_right == -1)
 		{
-			wolf->cam.pos_x -= cos(-wolf->cam.angle) * MOVE_SPEED;
-			wolf->cam.pos_y -= sin(-wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_x -= cos(wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_y += sin(wolf->cam.angle) * MOVE_SPEED;
 		}
 		if (wolf->cam.forward_backward == 1)
 		{

@@ -6,11 +6,16 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 14:34:27 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:33:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+uint32_t	RGBA_to_uint32(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+	return ((r << 24) + (g << 16) + (b << 8) + a);
+}
 
 void	ft_print(t_env *wolf)
 {
@@ -47,7 +52,8 @@ void	ft_print(t_env *wolf)
 		double	RayAngle = (wolf->cam.angle - wolf->cam.fov / 2.0) + ((double)xRender / (double)WIDTH) * wolf->cam.fov;
 		double	distanceToWall = 0;
 		int		hitWall = 0;
-		double	color_shade = BLACK;
+		uint32_t	color_shade = BLACK;
+		double		shading = 1;
 
 		EyeX = sin(RayAngle);
 		EyeY = cos(RayAngle);
@@ -56,7 +62,10 @@ void	ft_print(t_env *wolf)
 		{
 			distanceToWall += PRECISION;
 			color_shade += 0x01010100;
-			 if (color_shade > WHITE)
+			shading -= 0.004;
+			if (shading < 0)
+				shading = 0;
+			if (color_shade > WHITE)
 				color_shade = WHITE;
 
 			TestX = (int)(wolf->cam.pos_x + EyeX * distanceToWall);
@@ -84,12 +93,11 @@ void	ft_print(t_env *wolf)
 			if (yRender < Ceiling) // UP
 				wolf->pixels[yRender * WIDTH + xRender] = DODGER_BLUE;
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
-				wolf->pixels[yRender * WIDTH + xRender] = WHITE - color_shade;
+				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0);
 			else  //DOWN
-				wolf->pixels[yRender * WIDTH + xRender] = DARK_GREEN;
+				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 180 * ((yRender - HEIGHT * 0.5)/ HEIGHT), 0, 0);
 			yRender++;
 		}
-		yRender = 0;
 		xRender++;
 	}
 
@@ -138,7 +146,6 @@ void	ft_print(t_env *wolf)
 		i++;
 	}
 	
-	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
 	//SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x, wolf->cam.pos_y, wolf->cam.pos_x + wolf->cam.dir_x * 10, wolf->cam.pos_y + wolf->cam.dir_y * 10);
 	
 
@@ -148,10 +155,12 @@ void	ft_print(t_env *wolf)
 	SDL_UnlockTexture(wolf->texture);
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
 
-	//SDL_RenderDrawPoint(wolf->renderer, wolf->cam.pos_x, wolf->cam.pos_y);
 	
+	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
 	SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK,
 						(wolf->cam.pos_x + sin(wolf->cam.angle)) * BLOCK, (wolf->cam.pos_y + cos(wolf->cam.angle)) * BLOCK); //RAY from cam
+	SDL_SetRenderDrawColor(wolf->renderer, 0, 0, 255, 255);
+	SDL_RenderDrawPoint(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK);
 
 	SDL_RenderPresent(wolf->renderer);
 }

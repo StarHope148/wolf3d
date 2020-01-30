@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/28 17:49:36 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/30 14:34:27 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_print(t_env *wolf)
 	int	i;
 	int	j;
 
-	void	*tmp;
+	//void	*tmp;
 	int		pitch;
 	SDL_bool done;
 
@@ -27,8 +27,8 @@ void	ft_print(t_env *wolf)
 	int		def_x;
 	int		def_y;
 	
-	SDL_LockTexture(wolf->texture, NULL, &tmp, &pitch);
-	wolf->pixels = tmp;
+	SDL_LockTexture(wolf->texture, NULL, (void **)&(wolf->pixels), &pitch);
+	//wolf->pixels = tmp;
 	
 	//---------------------------------------------------------------------------------------------------------
 
@@ -47,6 +47,7 @@ void	ft_print(t_env *wolf)
 		double	RayAngle = (wolf->cam.angle - wolf->cam.fov / 2.0) + ((double)xRender / (double)WIDTH) * wolf->cam.fov;
 		double	distanceToWall = 0;
 		int		hitWall = 0;
+		double	color_shade = BLACK;
 
 		EyeX = sin(RayAngle);
 		EyeY = cos(RayAngle);
@@ -54,6 +55,9 @@ void	ft_print(t_env *wolf)
 		while (hitWall == 0 && distanceToWall < MAX_DEPTH)
 		{
 			distanceToWall += PRECISION;
+			color_shade += 0x01010100;
+			 if (color_shade > WHITE)
+				color_shade = WHITE;
 
 			TestX = (int)(wolf->cam.pos_x + EyeX * distanceToWall);
 			TestY = (int)(wolf->cam.pos_y + EyeY * distanceToWall);
@@ -70,7 +74,7 @@ void	ft_print(t_env *wolf)
 			}
 		}
 
-		int Ceiling = (double)(HEIGHT / 1.75) - HEIGHT / ((double)distanceToWall);
+		int Ceiling = (double)(HEIGHT / 2) - HEIGHT / distanceToWall;
 		int Floor = HEIGHT - Ceiling;
 
 		//printf("for xRender = %d\tCeiling = %d\tFloor = %d\n", xRender, Ceiling, Floor);
@@ -80,7 +84,7 @@ void	ft_print(t_env *wolf)
 			if (yRender < Ceiling) // UP
 				wolf->pixels[yRender * WIDTH + xRender] = DODGER_BLUE;
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
-				wolf->pixels[yRender * WIDTH + xRender] = SILVER;
+				wolf->pixels[yRender * WIDTH + xRender] = WHITE - color_shade;
 			else  //DOWN
 				wolf->pixels[yRender * WIDTH + xRender] = DARK_GREEN;
 			yRender++;

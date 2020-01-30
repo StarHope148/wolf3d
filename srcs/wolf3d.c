@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/28 17:30:09 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/30 14:38:44 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,26 +162,16 @@ void	ft_init_env(t_env *wolf)
 	wolf->mapdata.cur_line = 0;
 	wolf->mapdata.map = NULL;
 
-	wolf->cam.pos_x = 4.0;
-	wolf->cam.pos_y = 4.0;
+	wolf->cam.pos_x = 1.5;
+	wolf->cam.pos_y = 7.5;
 	wolf->cam.dir_x = -1;
 	wolf->cam.dir_y = 0;
-	wolf->cam.angle = 0;
-	wolf->cam.fov = 3.14159 / 2.0;
+	wolf->cam.angle = 2.26;
+	wolf->cam.fov = 3.14159 / 1.75;
 	wolf->cam.plane_x = 0;
 	wolf->cam.plane_y = 1;
-	wolf->cam.vel_x = 0;
+	wolf->cam.strafe_left_right = 0;
 	wolf->cam.forward_backward = 0;
-
-	wolf->ray.camera_x = 0;
-	wolf->ray.pos_x = 0;
-	wolf->ray.pos_y = 0;
-	wolf->ray.dir_x = 1;
-	wolf->ray.dir_y = 0;
-	wolf->ray.length_x = 0;
-	wolf->ray.length_y = 0;
-	wolf->ray.map_x = 0;
-	wolf->ray.map_y = 0;
 }
 
 void	ft_wolf3d(char *mapfile)

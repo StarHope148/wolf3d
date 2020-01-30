@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 16:35:02 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:14:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define WIDTH 1000
 # define HEIGHT 600
 
-# define MAX_DEPTH 16
+# define MAX_DEPTH 20
 # define PRECISION 0.05
-
-# define BLOCK 16
+# define SHADING_DEPTH 0.05
+# define BLOCK HEIGHT * 0.01
 
 # define MOVE_SPEED 0.025
 # define ROTATE_SPEED 0.02

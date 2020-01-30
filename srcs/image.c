@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 16:33:25 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:14:32 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	ft_print(t_env *wolf)
 		double	RayAngle = (wolf->cam.angle - wolf->cam.fov / 2.0) + ((double)xRender / (double)WIDTH) * wolf->cam.fov;
 		double	distanceToWall = 0;
 		int		hitWall = 0;
-		uint32_t	color_shade = BLACK;
 		double		shading = 1;
 
 		EyeX = sin(RayAngle);
@@ -61,12 +60,9 @@ void	ft_print(t_env *wolf)
 		while (hitWall == 0 && distanceToWall < MAX_DEPTH)
 		{
 			distanceToWall += PRECISION;
-			color_shade += 0x01010100;
-			shading -= 0.004;
+			shading -= PRECISION * SHADING_DEPTH;
 			if (shading < 0)
 				shading = 0;
-			if (color_shade > WHITE)
-				color_shade = WHITE;
 
 			TestX = (int)(wolf->cam.pos_x + EyeX * distanceToWall);
 			TestY = (int)(wolf->cam.pos_y + EyeY * distanceToWall);
@@ -83,7 +79,7 @@ void	ft_print(t_env *wolf)
 			}
 		}
 
-		int Ceiling = (double)(HEIGHT / 2) - HEIGHT / distanceToWall;
+		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall;
 		int Floor = HEIGHT - Ceiling;
 
 		//printf("for xRender = %d\tCeiling = %d\tFloor = %d\n", xRender, Ceiling, Floor);
@@ -95,7 +91,7 @@ void	ft_print(t_env *wolf)
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
 				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0);
 			else  //DOWN
-				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 180 * ((yRender - HEIGHT * 0.5)/ HEIGHT), 0, 0);
+				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 255 * ((yRender - HEIGHT * 0.5)/ HEIGHT), 0, 0);
 			yRender++;
 		}
 		xRender++;

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 17:15:52 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:30:04 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define HEIGHT 600
 
 # define MAX_DEPTH 20
-# define PRECISION 0.05
+# define PRECISION 0.02
 # define SHADING_DEPTH 0.05
 # define BLOCK HEIGHT * 0.01
 

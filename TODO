@@ -9,6 +9,9 @@ TODO :
 	}
 - rework controls key_hook()
 - weird stuff during parsing causing wrong tab format
+- add collision detection
+- add texture loader
+- then texture the world
 
 
 DONE :

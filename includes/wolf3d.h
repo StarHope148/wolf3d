@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 14:09:16 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 16:52:32 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define PI 3.14159
 
 # define WIDTH 1000
 # define HEIGHT 600

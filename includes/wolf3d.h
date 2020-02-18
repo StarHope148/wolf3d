@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/17 14:30:04 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 14:09:16 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "colors.h"
+
+# define TRUE 1
+# define FALSE 0
 
 # define WIDTH 1000
 # define HEIGHT 600
@@ -68,8 +71,12 @@ typedef struct	s_camera
 	double		fov;
 	double		plane_x;
 	double		plane_y;
-	ssize_t		strafe_left_right;
-	ssize_t		forward_backward;
+	size_t		strafe_left;
+	size_t		strafe_right;
+	size_t		forward;
+	size_t		backward;
+	size_t		rotate_left;
+	size_t		rotate_right;
 }				t_camera;
 
 typedef struct	s_env

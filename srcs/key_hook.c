@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 15:00:24 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 14:35:28 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ void	ft_key_hook(t_env *wolf)
 			if (wolf->event.key.keysym.sym == SDLK_ESCAPE)
 				ft_exit(wolf, EXIT_SUCCESS, NULL);
 			else if (wolf->event.key.keysym.sym == SDLK_w)
-				wolf->cam.forward_backward = -1;
+				wolf->cam.forward = TRUE;
 			else if (wolf->event.key.keysym.sym == SDLK_a)
-				wolf->cam.strafe_left_right = -1;
+				wolf->cam.strafe_left = TRUE;
 			else if (wolf->event.key.keysym.sym == SDLK_s)
-				wolf->cam.forward_backward = 1;
+				wolf->cam.backward = TRUE;
 			else if (wolf->event.key.keysym.sym == SDLK_d)
-				wolf->cam.strafe_left_right = 1;
+				wolf->cam.strafe_right = TRUE;
 			else if (wolf->event.key.keysym.sym == SDLK_RIGHT)
-				wolf->cam.angle += ROTATE_SPEED;
+				wolf->cam.rotate_right = TRUE;
 			else if (wolf->event.key.keysym.sym == SDLK_LEFT)
-				wolf->cam.angle -= ROTATE_SPEED;
+				wolf->cam.rotate_left = TRUE;
 			else if (wolf->event.key.keysym.sym == SDLK_x)
 			{
 				printf("---------------------\n");
@@ -47,37 +47,46 @@ void	ft_key_hook(t_env *wolf)
 		if (wolf->event.type == SDL_KEYUP)
 		{
 			if (wolf->event.key.keysym.sym == SDLK_w)
-				wolf->cam.forward_backward = 0;
+				wolf->cam.forward = FALSE;
 			else if (wolf->event.key.keysym.sym == SDLK_a)
-				wolf->cam.strafe_left_right = 0;
+				wolf->cam.strafe_left = FALSE;
 			else if (wolf->event.key.keysym.sym == SDLK_s)
-				wolf->cam.forward_backward = 0;
+				wolf->cam.backward = FALSE;
 			else if (wolf->event.key.keysym.sym == SDLK_d)
-				wolf->cam.strafe_left_right = 0;
+				wolf->cam.strafe_right = FALSE;
+			else if (wolf->event.key.keysym.sym == SDLK_RIGHT)
+				wolf->cam.rotate_right = FALSE;
+			else if (wolf->event.key.keysym.sym == SDLK_LEFT)
+				wolf->cam.rotate_left = FALSE;
 		}
 		else if (wolf->event.type == SDL_QUIT)
 			ft_exit(wolf, EXIT_SUCCESS, NULL);
 
-		if (wolf->cam.strafe_left_right == 1)
+		//refresh new position
+		if (wolf->cam.strafe_right == TRUE)
 		{
 			wolf->cam.pos_x += cos(wolf->cam.angle) * MOVE_SPEED;
 			wolf->cam.pos_y -= sin(wolf->cam.angle) * MOVE_SPEED;
 		}
-		if (wolf->cam.strafe_left_right == -1)
+		if (wolf->cam.strafe_left == TRUE)
 		{
 			wolf->cam.pos_x -= cos(wolf->cam.angle) * MOVE_SPEED;
 			wolf->cam.pos_y += sin(wolf->cam.angle) * MOVE_SPEED;
 		}
-		if (wolf->cam.forward_backward == 1)
+		if (wolf->cam.backward == TRUE)
 		{
 			wolf->cam.pos_x -= sin(wolf->cam.angle) * MOVE_SPEED;
 			wolf->cam.pos_y -= cos(wolf->cam.angle) * MOVE_SPEED;
 		}
-		if (wolf->cam.forward_backward == -1)
+		if (wolf->cam.forward == TRUE)
 		{
 			wolf->cam.pos_x += sin(wolf->cam.angle) * MOVE_SPEED;
 			wolf->cam.pos_y += cos(wolf->cam.angle) * MOVE_SPEED;
 		}
+		if (wolf->cam.rotate_left == TRUE)
+			wolf->cam.angle -= ROTATE_SPEED;
+		if (wolf->cam.rotate_right == TRUE)
+			wolf->cam.angle += ROTATE_SPEED;
 		ft_print(wolf);
 	}
 }

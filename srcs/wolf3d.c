@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/30 14:38:44 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 14:08:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,12 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.fov = 3.14159 / 1.75;
 	wolf->cam.plane_x = 0;
 	wolf->cam.plane_y = 1;
-	wolf->cam.strafe_left_right = 0;
-	wolf->cam.forward_backward = 0;
+	wolf->cam.strafe_left = 0;
+	wolf->cam.strafe_right = 0;
+	wolf->cam.forward = 0;
+	wolf->cam.backward = 0;
+	wolf->cam.rotate_left = 0;
+	wolf->cam.rotate_right = 0;
 }
 
 void	ft_wolf3d(char *mapfile)

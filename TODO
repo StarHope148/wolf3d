@@ -1,19 +1,24 @@
 TODO :
 
 - segfault if minimaps drawing exceeds WIDTH or HEIGHT of window (trying to access pixel offscreen)
+- weird stuff during parsing causing wrong tab format
+
+- rework controls key_hook()
+
+- fix fisheye effect
+- add collision detection
+- add texture loader
+- then texture the world
+
 - check leaks when exiting :
 	__attribute__((destructor)) void no_end(void);
 	void    no_end(void)
 	{
 		while (1);
 	}
-- rework controls key_hook()
-- weird stuff during parsing causing wrong tab format
-- add collision detection
-- add texture loader
-- then texture the world
 
 
 DONE :
 
 - strafing controls not working
+- fix controls responsiveness

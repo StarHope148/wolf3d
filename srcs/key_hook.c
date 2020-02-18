@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 14:35:28 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 17:23:57 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	ft_key_hook(t_env *wolf)
 		//refresh new position
 		if (wolf->cam.strafe_right == TRUE)
 		{
-			wolf->cam.pos_x += cos(wolf->cam.angle) * MOVE_SPEED;
-			wolf->cam.pos_y -= sin(wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_x -= cos(wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_y += sin(wolf->cam.angle) * MOVE_SPEED;
 		}
 		if (wolf->cam.strafe_left == TRUE)
 		{
-			wolf->cam.pos_x -= cos(wolf->cam.angle) * MOVE_SPEED;
-			wolf->cam.pos_y += sin(wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_x += cos(wolf->cam.angle) * MOVE_SPEED;
+			wolf->cam.pos_y -= sin(wolf->cam.angle) * MOVE_SPEED;
 		}
 		if (wolf->cam.backward == TRUE)
 		{
@@ -84,9 +84,9 @@ void	ft_key_hook(t_env *wolf)
 			wolf->cam.pos_y += cos(wolf->cam.angle) * MOVE_SPEED;
 		}
 		if (wolf->cam.rotate_left == TRUE)
-			wolf->cam.angle -= ROTATE_SPEED;
-		if (wolf->cam.rotate_right == TRUE)
 			wolf->cam.angle += ROTATE_SPEED;
+		if (wolf->cam.rotate_right == TRUE)
+			wolf->cam.angle -= ROTATE_SPEED;
 		ft_print(wolf);
 	}
 }

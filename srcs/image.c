@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 14:37:24 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 17:22:00 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_print(t_env *wolf)
 	xRender = 0;
 	while (xRender < WIDTH)
 	{
-		double	RayAngle = (wolf->cam.angle - wolf->cam.fov / 2.0) + ((double)xRender / (double)WIDTH) * wolf->cam.fov;
+		double	RayAngle = (wolf->cam.angle + wolf->cam.fov / 2.0) - ((double)xRender / (double)WIDTH) * wolf->cam.fov;
 		double	distanceToWall = 0;
 		int		hitWall = 0;
 		double		shading = 1;

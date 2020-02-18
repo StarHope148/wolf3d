@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 16:53:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 17:41:39 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.dir_x = -1;
 	wolf->cam.dir_y = 0;
 	wolf->cam.angle = 0;
-	wolf->cam.fov = PI / 2;
+	wolf->cam.fov = FOV;
 	wolf->cam.plane_x = 0;
 	wolf->cam.plane_y = 1;
 	wolf->cam.strafe_left = 0;

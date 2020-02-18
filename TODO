@@ -3,9 +3,6 @@ TODO :
 - segfault if minimaps drawing exceeds WIDTH or HEIGHT of window (trying to access pixel offscreen)
 - weird stuff during parsing causing wrong tab format
 
-- rework controls key_hook()
-
-- fix fisheye effect
 - add collision detection
 - add texture loader
 - then texture the world
@@ -22,3 +19,5 @@ DONE :
 
 - strafing controls not working
 - fix controls responsiveness
+- fix render and minimap movememt/rotation relation
+- fix fisheye effect

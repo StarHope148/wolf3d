@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 17:22:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/18 17:59:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,15 @@ void	ft_print(t_env *wolf)
 			else
 			{
 				if (wolf->mapdata.map[TestY][TestX] == WALL)
+				{
+					distanceToWall *= cos(wolf->cam.angle - RayAngle); //fix fisheye distorsion
 					hitWall = 1; 
+				}
 			}
 		}
 
-		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall;
+		
+		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall;		
 		int Floor = HEIGHT - Ceiling;
 
 		//printf("for xRender = %d\tCeiling = %d\tFloor = %d\n", xRender, Ceiling, Floor);

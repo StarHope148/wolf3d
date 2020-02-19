@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 17:59:17 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/19 12:36:39 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_print(t_env *wolf)
 		}
 
 		
-		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall;		
+		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall * WALL_SIZE;		
 		int Floor = HEIGHT - Ceiling;
 
 		//printf("for xRender = %d\tCeiling = %d\tFloor = %d\n", xRender, Ceiling, Floor);
@@ -95,7 +95,7 @@ void	ft_print(t_env *wolf)
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
 				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0);
 			else  //DOWN
-				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 255 * ((yRender - HEIGHT * 0.5)/ HEIGHT), 0, 0);
+				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 255 * ((yRender - HEIGHT * 0.5) / HEIGHT), 0, 0);
 			yRender++;
 		}
 		xRender++;
@@ -159,7 +159,7 @@ void	ft_print(t_env *wolf)
 	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
 	SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK,
 						(wolf->cam.pos_x + sin(wolf->cam.angle)) * BLOCK, (wolf->cam.pos_y + cos(wolf->cam.angle)) * BLOCK); //RAY from cam
-	SDL_SetRenderDrawColor(wolf->renderer, 0, 0, 255, 255);
+	SDL_SetRenderDrawColor(wolf->renderer, 255, 255, 255, 255);
 	SDL_RenderDrawPoint(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK);
 
 	SDL_RenderPresent(wolf->renderer);

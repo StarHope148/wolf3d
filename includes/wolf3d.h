@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 18:04:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/19 12:31:29 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define PRECISION 0.02
 # define SHADING_DEPTH 0.05
 # define BLOCK HEIGHT * 0.01
+# define WALL_SIZE 0.8
 
 # define MOVE_SPEED 0.025
 # define ROTATE_SPEED 0.025

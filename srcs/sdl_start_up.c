@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/01/28 15:06:00 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/25 16:00:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ void				ft_exit(t_env *wolf, int exit_type, char *message)
 {
 	if (wolf->format != NULL)
 		SDL_FreeFormat(wolf->format);
+	if (wolf->surface_tmp != NULL)
+		SDL_FreeSurface(wolf->surface_tmp);
 	if (wolf->texture != NULL)
 		SDL_DestroyTexture(wolf->texture);
+	if (wolf->wall != NULL)
+		SDL_DestroyTexture(wolf->wall);
 	if (wolf->renderer != NULL)
 		SDL_DestroyRenderer(wolf->renderer);
 	if (wolf->window != NULL)
@@ -60,10 +64,20 @@ void			ft_init_renderer_texture(t_env *wolf)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateTexture() ");
 }
 
+void			ft_load_img(t_env *wolf)
+{
+	wolf->surface_tmp = SDL_LoadBMP("textures/brick_wall.bmp");
+	if (wolf->surface_tmp == NULL)
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_LoadBMP() ");
+	wolf->wall = SDL_CreateTextureFromSurface(wolf->renderer, wolf->surface_tmp);
+	SDL_FreeSurface(wolf->surface_tmp);
+}
+
 void			ft_sdl(t_env *wolf)
 {
 	ft_init_window_renderer(wolf);
 	ft_init_renderer_texture(wolf);
+	ft_load_img(wolf);
 	ft_print(wolf);
 	ft_key_hook(wolf);
 	ft_exit(wolf, EXIT_SUCCESS, NULL);

@@ -1,10 +1,8 @@
 TODO :
 
 - segfault if minimaps drawing exceeds WIDTH or HEIGHT of window (trying to access pixel offscreen)
-- weird stuff during parsing causing wrong tab format
 
 - add smooth sliding while colliding on walls depending of angle
-- add texture loader
 - then texture the world
 
 - check leaks when exiting :
@@ -22,3 +20,4 @@ DONE :
 - fix render and minimap movememt/rotation relation
 - fix fisheye effect
 - added simple collision detection
+- add texture loader

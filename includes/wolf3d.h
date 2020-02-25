@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/19 12:31:29 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:40:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct	s_env
 	SDL_Window 		*window;
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
+	SDL_Texture		*wall;
+	SDL_Surface		*surface_tmp;
 	SDL_PixelFormat *format;
 	SDL_Event 		event;
 	t_map			mapdata;

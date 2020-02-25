@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/19 12:36:39 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/25 16:03:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_print(t_env *wolf)
 	int		def_x;
 	int		def_y;
 	
-	SDL_LockTexture(wolf->texture, NULL, (void **)&(wolf->pixels), &pitch);
+	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->pixels), &pitch);
 	//wolf->pixels = tmp;
 	
 	//---------------------------------------------------------------------------------------------------------

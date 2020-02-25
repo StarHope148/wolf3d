@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/25 16:03:25 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/25 17:41:05 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_print(t_env *wolf)
 
 	//void	*tmp;
 	int		pitch;
+	int		pitch_wall;
 	SDL_bool done;
 
 	int		x;
@@ -33,6 +34,7 @@ void	ft_print(t_env *wolf)
 	int		def_y;
 	
 	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->pixels), &pitch);
+	SDL_LockTexture(wolf->wall, NULL, (void *)&(wolf->pixels_wall), &pitch_wall);
 	//wolf->pixels = tmp;
 	
 	//---------------------------------------------------------------------------------------------------------
@@ -93,6 +95,7 @@ void	ft_print(t_env *wolf)
 			if (yRender < Ceiling) // UP
 				wolf->pixels[yRender * WIDTH + xRender] = DODGER_BLUE;
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
+				//wolf->pixels[yRender * WIDTH + xRender] = wolf->pixels_wall[0]; //brick_wall texturing
 				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0);
 			else  //DOWN
 				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 255 * ((yRender - HEIGHT * 0.5) / HEIGHT), 0, 0);

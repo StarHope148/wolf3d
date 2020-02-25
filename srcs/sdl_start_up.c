@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/25 16:00:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/25 17:31:41 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void			ft_load_img(t_env *wolf)
 	if (wolf->surface_tmp == NULL)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_LoadBMP() ");
 	wolf->wall = SDL_CreateTextureFromSurface(wolf->renderer, wolf->surface_tmp);
+	if (wolf->wall == NULL)
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateTextureFromSurface() ");
 	SDL_FreeSurface(wolf->surface_tmp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/25 14:40:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/02/25 17:33:57 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct	s_env
 	t_map			mapdata;
 	t_camera		cam;
 	Uint32			*pixels;
+	Uint32			*pixels_wall;
 }				t_env;
 
 void		ft_wolf3d(char *mapfile);

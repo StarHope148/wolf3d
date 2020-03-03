@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/25 17:33:57 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/03 18:25:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,13 @@
 # define WALL '#'
 # define EMPTY '.'
 
-/* typedef enum	e_control
+typedef enum	e_cardinal_point
 {
-	FORWARD,
-	STRAFE_RIGHT,
-	BACKWARD,
-	STRAFE_LEFT,
-	ROTATE
-}				t_control; */
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}				t_cardinal_point; 
 
 typedef struct	s_point
 {

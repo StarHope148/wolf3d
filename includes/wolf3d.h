@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/04 15:57:58 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:16:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef enum	e_cardinal_point
 	EAST
 }				t_cardinal_point; 
 
-typedef struct	s_point
+/* typedef struct	s_point
 {
 	int			x;
 	int			y;
-}				t_point;
+}				t_point; */
 
 typedef struct	s_map
 {
@@ -92,6 +92,7 @@ typedef struct	s_env
 	t_camera		cam;
 	Uint32			*pixels;
 	Uint32			*pixels_wall;
+	double			precision;
 }				t_env;
 
 void		ft_wolf3d(char *mapfile);

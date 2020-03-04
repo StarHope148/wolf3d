@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/04 16:24:36 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:38:29 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_print(t_env *wolf)
 
 		while (hitWall == 0 && distanceToWall < MAX_DEPTH)
 		{
-			distanceToWall += PRECISION;
+			distanceToWall += wolf->precision;
 			shading -= PRECISION * SHADING_DEPTH;
 			if (shading < 0)
 				shading = 0;

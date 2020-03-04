@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/02/18 18:35:55 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:17:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,17 @@ void	ft_key_hook(t_env *wolf)
 			}
 		}
 		if (wolf->cam.rotate_left == TRUE)
+		{
 			wolf->cam.angle += ROTATE_SPEED;
+			if (wolf->cam.angle > PI)
+				wolf->cam.angle = -PI;
+		}
 		if (wolf->cam.rotate_right == TRUE)
+		{
 			wolf->cam.angle -= ROTATE_SPEED;
+			if (wolf->cam.angle <= -PI)
+				wolf->cam.angle = PI;
+		}
 
 		
 		ft_print(wolf);

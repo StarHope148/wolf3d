@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/03 18:25:22 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:57:58 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define FOV PI / 3
 
 # define MAX_DEPTH 20
-# define PRECISION 0.02
+# define PRECISION 0.01
 # define SHADING_DEPTH 0.05
 # define BLOCK HEIGHT * 0.01
 # define WALL_SIZE 0.8
@@ -69,12 +69,8 @@ typedef struct	s_camera
 {
 	double		pos_x;
 	double		pos_y;
-	double		dir_x;
-	double		dir_y;
 	double		angle;
 	double		fov;
-	double		plane_x;
-	double		plane_y;
 	size_t		strafe_left;
 	size_t		strafe_right;
 	size_t		forward;

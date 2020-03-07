@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/04 17:16:22 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/06 16:55:24 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,28 @@ typedef struct	s_camera
 	size_t		rotate_right;
 }				t_camera;
 
+typedef struct	s_wall_texture
+{
+	SDL_Texture		*texture;
+	Uint32			*pixels;
+	Uint32			format;
+	int				access;
+	int				width;
+	int				height;
+}				t_wall_texture;
+
 typedef struct	s_env
 {
 	SDL_Window 		*window;
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
-	SDL_Texture		*wall;
 	SDL_Surface		*surface_tmp;
 	SDL_PixelFormat *format;
 	SDL_Event 		event;
 	t_map			mapdata;
 	t_camera		cam;
 	Uint32			*pixels;
-	Uint32			*pixels_wall;
+	t_wall_texture	wall_brick_img;
 	double			precision;
 }				t_env;
 

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/04 17:15:55 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/06 16:56:15 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ void	ft_init_env(t_env *wolf)
 	wolf->window = NULL;
 	wolf->renderer = NULL;
 	wolf->texture = NULL;
-	wolf->wall = NULL;
 	wolf->surface_tmp = NULL;
 	wolf->format = NULL;
 	wolf->pixels = NULL;

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/04 17:38:29 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/07 15:44:24 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_print(t_env *wolf)
 	int		def_y;
 	
 	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->pixels), &pitch);
-	//SDL_LockTexture(wolf->wall, NULL, (void *)&(wolf->pixels_wall), &pitch_wall);
+	SDL_LockTexture(wolf->wall_brick_img.texture, NULL, (void *)&(wolf->wall_brick_img.pixels), &pitch);
 	//wolf->pixels = tmp;
 	
 	//---------------------------------------------------------------------------------------------------------
@@ -84,8 +84,27 @@ void	ft_print(t_env *wolf)
 		//--------------------------------------
 		// Determine where X and Y of the wall has been collided
 	
-		
+		double sampleX;
+		double sampleY;
 
+		double fBlockMidX = (double)TestX + 0.5f;
+		double fBlockMidY = (double)TestY + 0.5f;
+
+		double fTestPointX = wolf->cam.pos_x + EyeX * distanceToWall;
+		double fTestPointY = wolf->cam.pos_y + EyeY * distanceToWall;
+
+		double fTestAngle = atan2f((fTestPointY - fBlockMidY), (fTestPointX - fBlockMidX));
+
+		if (fTestAngle >= -3.14159f * 0.25f && fTestAngle < 3.14159f * 0.25f)
+			sampleX = fTestPointY - (double)TestY;
+		if (fTestAngle >= 3.14159f * 0.25f && fTestAngle < 3.14159f * 0.75f)
+			sampleX = fTestPointX - (double)TestX;
+		if (fTestAngle < -3.14159f * 0.25f && fTestAngle >= -3.14159f * 0.75f)
+			sampleX = fTestPointX - (double)TestX;
+		if (fTestAngle >= 3.14159f * 0.75f || fTestAngle < -3.14159f * 0.75f)
+			sampleX = fTestPointY - (double)TestY;
+
+		sampleX -= (int)sampleX;
 		//----------------------------------------
 		//printf("distanceToWall = %f\n", distanceToWall);			//DEBUG
 		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall * WALL_SIZE;		
@@ -100,9 +119,10 @@ void	ft_print(t_env *wolf)
 				wolf->pixels[yRender * WIDTH + xRender] = DODGER_BLUE;
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
 			{
-
-				//wolf->pixels[yRender * WIDTH + xRender] = 0; //brick_wall texturing
-				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0); //non textured wall
+				sampleY -= (int)sampleY;
+				sampleY = ((double)yRender - (double)Ceiling) / ((double)Floor - (double)Ceiling);
+				wolf->pixels[yRender * WIDTH + xRender] = wolf->wall_brick_img.pixels[(int)(sampleY * wolf->wall_brick_img.width + sampleX)]; //brick_wall texturing
+				//wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0); //non textured wall
 			}
 			else  //DOWN
 				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 255 * ((yRender - HEIGHT * 0.5) / HEIGHT), 0, 0);
@@ -162,7 +182,7 @@ void	ft_print(t_env *wolf)
 	// ###### DISPLAYING ######
 	SDL_UnlockTexture(wolf->texture);
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
-
+	//SDL_RenderCopy(wolf->renderer, wolf->wall_texture, NULL, NULL);
 	
 	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
 	SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK,

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/06 16:59:35 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/09 11:12:24 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void			ft_load_img(t_env *wolf)
 					&wolf->wall_brick_img.access,
 					&wolf->wall_brick_img. width,
 					&wolf->wall_brick_img.height);
+	printf("texture format = %d\n", wolf->wall_brick_img.format);		//DEBUG
 }
 
 void			ft_sdl(t_env *wolf)

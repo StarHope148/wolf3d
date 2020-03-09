@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/06 16:55:24 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/03/09 11:08:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PI 3.14159
 
 # define WIDTH 1000
-# define HEIGHT 600
+# define HEIGHT 800
 
 # define FOV PI / 3
 

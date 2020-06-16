@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/16 20:23:56 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/16 23:33:53 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_print(t_env *wolf)
 		while (hitWall == 0 && distanceToWall < MAX_DEPTH)
 		{
 			distanceToWall += wolf->precision;
-			shading -= PRECISION * SHADING_DEPTH;
+			shading -= RAY_LENGHT * SHADING_DEPTH;
 			if (shading < 0)
 				shading = 0;
 
@@ -98,14 +98,30 @@ void	ft_print(t_env *wolf)
 
 		double fTestAngle = atan2((TestPointY - BlockMidY), (TestPointX - BlockMidX));
 
-		if (fTestAngle >= -PI * 0.25 && fTestAngle < PI * 0.25)
+		if (fTestAngle >= -PI * 0.25 && fTestAngle < PI * 0.25)		//WEST
+		{
 			sampleX = TestPointY - (double)TestY;
-		if (fTestAngle >= PI * 0.25 && fTestAngle < PI * 0.75)
+			wolf->orientation = WEST;
+			//printf("case WEST\n");
+		}
+		if (fTestAngle >= PI * 0.25 && fTestAngle < PI * 0.75)		//NORTH
+		{
 			sampleX = TestPointX - (double)TestX;
-		if (fTestAngle < -PI * 0.25 && fTestAngle >= -PI * 0.75)
+			wolf->orientation = NORTH;
+			//printf("case NORTH\n");
+		}
+		if (fTestAngle < -PI * 0.25 && fTestAngle >= -PI * 0.75)	//SOUTH
+		{
 			sampleX = TestPointX - (double)TestX;
-		if (fTestAngle >= PI * 0.75 || fTestAngle < -PI * 0.75)
+			wolf->orientation = SOUTH;
+			//printf("case SOUTH\n");
+		}
+		if (fTestAngle >= PI * 0.75 || fTestAngle < -PI * 0.75)		//EAST
+		{
 			sampleX = TestPointY - (double)TestY;
+			wolf->orientation = EAST;
+			//printf("case EAST\n");
+		}
 
 		sampleX = fabs(sampleX - (int)sampleX);
 		//----------------------------------------
@@ -124,9 +140,20 @@ void	ft_print(t_env *wolf)
 			{
 				sampleY = ((double)yRender - (double)Ceiling) / ((double)Floor - (double)Ceiling);
 				sampleY = fabs(sampleY - (int)sampleY);
-				//wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * wolf->surface_wall->w * wolf->surface_wall->w  + sampleX * wolf->surface_wall->h)]; // RED brick_wall "texturing"
-				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * wolf->surface_wall->w * wolf->surface_wall->w + sampleX * wolf->surface_wall->h)]; // RED brick_wall "texturing"
-				//wolf->pixels[yRender * WIDTH + xRender] = wolf->wall_brick_img.pixels[(int)(sampleY * wolf->wall_brick_img.height * wolf->wall_brick_img.width + sampleX * wolf->wall_brick_img.width)]; //brick_wall texturing
+				
+				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * wolf->surface_wall->w * wolf->surface_wall->w + sampleX * wolf->surface_wall->h)]; // brick_wall "texturing"
+
+				//CARDINAL COLORING
+				if (wolf->orientation == NORTH)
+					wolf->pixels[yRender * WIDTH + xRender] = RED; // cardinal coloring
+				else if (wolf->orientation == SOUTH)
+					wolf->pixels[yRender * WIDTH + xRender] = BLUE; // cardinal coloring
+				else if (wolf->orientation == EAST)
+					wolf->pixels[yRender * WIDTH + xRender] = YELLOW; // cardinal coloring
+				else if (wolf->orientation == WEST)
+					wolf->pixels[yRender * WIDTH + xRender] = PURPLE; // cardinal coloring
+
+
 				//wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0); //non textured wall
 			}
 			else  //DOWN

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/16 18:01:50 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/16 23:32:06 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define FOV PI / 3
 
 # define MAX_DEPTH 20
-# define PRECISION 0.01
+# define RAY_LENGHT 0.01
 # define SHADING_DEPTH 0.05
 # define BLOCK HEIGHT * 0.01
 # define WALL_SIZE 0.8
@@ -102,6 +102,7 @@ typedef struct	s_env
 	Uint32			*pixels;
 	t_wall_texture	wall_brick_img;
 	SDL_Surface		*surface_wall;
+	char			orientation;
 	double			precision;
 }				t_env;
 

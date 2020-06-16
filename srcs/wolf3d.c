@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:57:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/06 16:56:15 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/16 23:12:15 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.rotate_left = 0;
 	wolf->cam.rotate_right = 0;
 
-	wolf->precision = PRECISION;
+	wolf->precision = RAY_LENGHT;
 }
 
 void	ft_wolf3d(char *mapfile)

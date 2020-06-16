@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/09 11:12:24 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/16 20:01:37 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,29 @@ void			ft_load_img(t_env *wolf)
 					&wolf->wall_brick_img. width,
 					&wolf->wall_brick_img.height);
 	printf("texture format = %d\n", wolf->wall_brick_img.format);		//DEBUG
+	printf("texture width = %d\n", wolf->wall_brick_img.width);		//DEBUG
+	printf("texture height = %d\n", wolf->wall_brick_img.height);		//DEBUG
+}
+
+void			ft_load_surface(t_env *wolf)
+{
+	wolf->surface_wall = SDL_LoadBMP("textures/brick_wall.bmp");
+	SDL_SetSurfaceRLE(wolf->surface_wall, 1);
+	printf("texture format = %d\n", wolf->surface_wall->format->format);		//DEBUG
+	
+	printf("texture width = %d\n", wolf->surface_wall->w);		//DEBUG
+	printf("texture height = %d\n", wolf->surface_wall->h);		//DEBUG
+	wolf->surface_wall = SDL_ConvertSurfaceFormat(wolf->surface_wall, SDL_PIXELFORMAT_RGBA8888, 1);
+	printf("texture format after convert = %d\n", wolf->surface_wall->format->format);		//DEBUG
+
 }
 
 void			ft_sdl(t_env *wolf)
 {
 	ft_init_window_renderer(wolf);
 	ft_init_renderer_texture(wolf);
-	ft_load_img(wolf);
+	//ft_load_img(wolf);
+	ft_load_surface(wolf);
 	ft_print(wolf);
 	ft_key_hook(wolf);
 	ft_exit(wolf, EXIT_SUCCESS, NULL);

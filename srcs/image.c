@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/09 17:40:38 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/16 20:04:35 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_print(t_env *wolf)
 
 	//void	*tmp;
 	int		pitch;
-	int		pitch_wall;
+	//int		pitch_wall;
 	SDL_bool done;
 
 	int		x;
@@ -34,7 +34,9 @@ void	ft_print(t_env *wolf)
 	int		def_y;
 	
 	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->pixels), &pitch);
-	SDL_LockTexture(wolf->wall_brick_img.texture, NULL, (void *)&(wolf->wall_brick_img.pixels), &pitch_wall);
+	//SDL_LockTexture(wolf->wall_brick_img.texture, NULL, (void *)&(wolf->wall_brick_img.pixels), &pitch_wall);
+	SDL_LockSurface(wolf->surface_wall);
+	Uint32 *pixels_wall = wolf->surface_wall->pixels;
 	//printf("pitch = %d\tpitch_wall = %d\n", pitch, pitch_wall);			//DEBUG
 	//wolf->pixels = tmp;
 	
@@ -55,7 +57,7 @@ void	ft_print(t_env *wolf)
 		double	RayAngle = (wolf->cam.angle + wolf->cam.fov / 2.0) - ((double)xRender / (double)WIDTH) * wolf->cam.fov;
 		double	distanceToWall = 0;
 		int		hitWall = 0;
-		double		shading = 1;
+		double	shading = 1;
 
 		EyeX = sin(RayAngle);
 		EyeY = cos(RayAngle);
@@ -122,7 +124,9 @@ void	ft_print(t_env *wolf)
 			{
 				sampleY = ((double)yRender - (double)Ceiling) / ((double)Floor - (double)Ceiling);
 				sampleY = fabs(sampleY - (int)sampleY);
-				wolf->pixels[yRender * WIDTH + xRender] = wolf->wall_brick_img.pixels[(int)(sampleY * wolf->wall_brick_img.height * wolf->wall_brick_img.width + sampleX * wolf->wall_brick_img.width)]; //brick_wall texturing
+				//wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * wolf->surface_wall->w * wolf->surface_wall->w  + sampleX * wolf->surface_wall->h)]; // RED brick_wall "texturing"
+				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * 636 * 636 + sampleX * 639)]; // RED brick_wall "texturing"
+				//wolf->pixels[yRender * WIDTH + xRender] = wolf->wall_brick_img.pixels[(int)(sampleY * wolf->wall_brick_img.height * wolf->wall_brick_img.width + sampleX * wolf->wall_brick_img.width)]; //brick_wall texturing
 				//wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0); //non textured wall
 			}
 			else  //DOWN
@@ -178,6 +182,26 @@ void	ft_print(t_env *wolf)
 	}
 	
 
+	// TESTING IMAGE COPY PIXEL BY PIXEL ON SCREEN
+	/* yRender = 10;
+	int	imgX = 0;
+	int imgY = 0;
+	while (yRender < HEIGHT)
+	{
+		xRender = 10;
+		imgX = 0;
+		while (xRender < WIDTH)
+		{
+			if (imgX < 636 && imgY < 639)
+				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[imgY * 636 + imgX];
+			imgX++;
+			xRender++;
+		}
+		imgY++;
+		yRender++;
+	} */
+
+	
 	//---------------------------------------------------------------------------------------------------------
 
 	//display wall_brick texture for testing
@@ -190,8 +214,14 @@ void	ft_print(t_env *wolf)
 	// ###### DISPLAYING ######
 	SDL_UnlockTexture(wolf->texture);
 	SDL_UnlockTexture(wolf->wall_brick_img.texture);
+	SDL_UnlockSurface(wolf->surface_wall);
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
-	//SDL_RenderCopy(wolf->renderer, wolf->wall_texture, NULL, NULL);
+
+
+	// TESTING IMAGE COPY ON SCREEN
+	//SDL_Rect test1 = {0, 0, 636, 639};
+	//SDL_Rect test2 = {WIDTH * 0.25, HEIGHT * 0.25, 500, 400};
+	//SDL_RenderCopy(wolf->renderer, wolf->surface_wall.texture, &test1, &test2);
 	
 	SDL_SetRenderDrawColor(wolf->renderer, 255, 0, 0, 255);
 	SDL_RenderDrawLine(wolf->renderer, wolf->cam.pos_x * BLOCK, wolf->cam.pos_y * BLOCK,

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/03/09 11:08:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:01:50 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct	s_env
 	t_camera		cam;
 	Uint32			*pixels;
 	t_wall_texture	wall_brick_img;
+	SDL_Surface		*surface_wall;
 	double			precision;
 }				t_env;
 

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/16 20:04:35 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/16 20:23:56 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	ft_print(t_env *wolf)
 				sampleY = ((double)yRender - (double)Ceiling) / ((double)Floor - (double)Ceiling);
 				sampleY = fabs(sampleY - (int)sampleY);
 				//wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * wolf->surface_wall->w * wolf->surface_wall->w  + sampleX * wolf->surface_wall->h)]; // RED brick_wall "texturing"
-				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * 636 * 636 + sampleX * 639)]; // RED brick_wall "texturing"
+				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * wolf->surface_wall->w * wolf->surface_wall->w + sampleX * wolf->surface_wall->h)]; // RED brick_wall "texturing"
 				//wolf->pixels[yRender * WIDTH + xRender] = wolf->wall_brick_img.pixels[(int)(sampleY * wolf->wall_brick_img.height * wolf->wall_brick_img.width + sampleX * wolf->wall_brick_img.width)]; //brick_wall texturing
 				//wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0); //non textured wall
 			}

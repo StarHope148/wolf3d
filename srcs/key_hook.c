@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/16 20:11:18 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/17 18:42:28 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	ft_key_hook(t_env *wolf)
 				wolf->cam.rotate_left = TRUE;
 			else if (wolf->event.key.keysym.sym == SDLK_KP_PLUS)
 			{
-				wolf->precision /= 1.5;
+				if (wolf->precision - RAY_LENGHT_STEP > 0)
+					wolf->precision -= RAY_LENGHT_STEP;
 				printf("ray lenght = %f\n", wolf->precision);			//DEBUG
 			}
 			else if (wolf->event.key.keysym.sym == SDLK_KP_MINUS)
 			{
-				wolf->precision *= 1.5;
+				wolf->precision += RAY_LENGHT_STEP;
 				printf("ray lenght = %f\n", wolf->precision);			//DEBUG
 
 			}

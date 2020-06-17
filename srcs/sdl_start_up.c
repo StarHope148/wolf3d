@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/16 20:09:05 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/17 18:45:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			ft_load_img(t_env *wolf)
 
 void			ft_load_surface(t_env *wolf)
 {
-	wolf->surface_wall = SDL_LoadBMP("textures/brick_wall.bmp");
+	wolf->surface_wall = SDL_LoadBMP("textures/gray_wall.bmp");
 	SDL_SetSurfaceRLE(wolf->surface_wall, 1);	
 	wolf->surface_wall = SDL_ConvertSurfaceFormat(wolf->surface_wall, SDL_PIXELFORMAT_RGBA8888, 1);
 	printf("texture format after convert = %d\n   (SDL_PIXELFORMAT_RGBA8888 = 373694468)\n", wolf->surface_wall->format->format);		//DEBUG

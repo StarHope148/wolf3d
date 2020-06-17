@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/16 23:33:53 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/17 18:19:11 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_print(t_env *wolf)
 
 		if (fTestAngle >= -PI * 0.25 && fTestAngle < PI * 0.25)		//WEST
 		{
-			sampleX = TestPointY - (double)TestY;
+			sampleX = TestPointY - (double)TestY - 1;
 			wolf->orientation = WEST;
 			//printf("case WEST\n");
 		}
@@ -112,7 +112,7 @@ void	ft_print(t_env *wolf)
 		}
 		if (fTestAngle < -PI * 0.25 && fTestAngle >= -PI * 0.75)	//SOUTH
 		{
-			sampleX = TestPointX - (double)TestX;
+			sampleX = TestPointX - (double)TestX - 1;
 			wolf->orientation = SOUTH;
 			//printf("case SOUTH\n");
 		}
@@ -139,19 +139,21 @@ void	ft_print(t_env *wolf)
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
 			{
 				sampleY = ((double)yRender - (double)Ceiling) / ((double)Floor - (double)Ceiling);
-				sampleY = fabs(sampleY - (int)sampleY);
-				
-				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[(int)(sampleY * wolf->surface_wall->w * wolf->surface_wall->w + sampleX * wolf->surface_wall->h)]; // brick_wall "texturing"
+				//sampleY = fabs(sampleY - (int)sampleY);
 
+				int surfaceY = sampleY * wolf->surface_wall->w;
+				int	surfaceX = sampleX * wolf->surface_wall->h;
+				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[surfaceY * wolf->surface_wall->w + surfaceX]; // brick_wall "texturing"
+				
 				//CARDINAL COLORING
-				if (wolf->orientation == NORTH)
+				/* if (wolf->orientation == NORTH)
 					wolf->pixels[yRender * WIDTH + xRender] = RED; // cardinal coloring
 				else if (wolf->orientation == SOUTH)
 					wolf->pixels[yRender * WIDTH + xRender] = BLUE; // cardinal coloring
 				else if (wolf->orientation == EAST)
 					wolf->pixels[yRender * WIDTH + xRender] = YELLOW; // cardinal coloring
 				else if (wolf->orientation == WEST)
-					wolf->pixels[yRender * WIDTH + xRender] = PURPLE; // cardinal coloring
+					wolf->pixels[yRender * WIDTH + xRender] = PURPLE; // cardinal coloring */
 
 
 				//wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0); //non textured wall

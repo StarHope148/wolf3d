@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/17 18:19:11 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/19 17:33:40 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	ft_print(t_env *wolf)
 	int	i;
 	int	j;
 
-	//void	*tmp;
 	int		pitch;
-	//int		pitch_wall;
 	SDL_bool done;
 
 	int		x;
@@ -34,11 +32,8 @@ void	ft_print(t_env *wolf)
 	int		def_y;
 	
 	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->pixels), &pitch);
-	//SDL_LockTexture(wolf->wall_brick_img.texture, NULL, (void *)&(wolf->wall_brick_img.pixels), &pitch_wall);
 	SDL_LockSurface(wolf->surface_wall);
 	Uint32 *pixels_wall = wolf->surface_wall->pixels;
-	//printf("pitch = %d\tpitch_wall = %d\n", pitch, pitch_wall);			//DEBUG
-	//wolf->pixels = tmp;
 	
 	//---------------------------------------------------------------------------------------------------------
 
@@ -129,9 +124,8 @@ void	ft_print(t_env *wolf)
 		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall * WALL_SIZE;		
 		int Floor = HEIGHT - Ceiling;
 
-		//printf("for xRender = %d\tCeiling = %d\tFloor = %d\n", xRender, Ceiling, Floor);
+
 		yRender = 0;
-		//Uint32	*texture_pixels = wolf->surface_tmp->pixels;
 		while (yRender < HEIGHT)
 		{
 			if (yRender < Ceiling) // UP
@@ -242,7 +236,6 @@ void	ft_print(t_env *wolf)
 
 	// ###### DISPLAYING ######
 	SDL_UnlockTexture(wolf->texture);
-	SDL_UnlockTexture(wolf->wall_brick_img.texture);
 	SDL_UnlockSurface(wolf->surface_wall);
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
 

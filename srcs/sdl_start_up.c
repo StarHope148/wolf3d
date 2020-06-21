@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/17 18:45:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/19 17:31:08 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void				ft_exit(t_env *wolf, int exit_type, char *message)
 {
 	if (wolf->format != NULL)
 		SDL_FreeFormat(wolf->format);
-	if (wolf->surface_tmp != NULL)
-		SDL_FreeSurface(wolf->surface_tmp);
 	if (wolf->texture != NULL)
 		SDL_DestroyTexture(wolf->texture);
-	if (wolf->wall_brick_img.texture != NULL)
-		SDL_DestroyTexture(wolf->wall_brick_img.texture);
+	if (wolf->surface_wall != NULL)
+		SDL_FreeSurface(wolf->surface_wall);
 	if (wolf->renderer != NULL)
 		SDL_DestroyRenderer(wolf->renderer);
 	if (wolf->window != NULL)
@@ -64,25 +62,6 @@ void			ft_init_renderer_texture(t_env *wolf)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateTexture() ");
 }
 
-void			ft_load_img(t_env *wolf)
-{
-	wolf->surface_tmp = SDL_LoadBMP("textures/brick_wall.bmp");
-	if (wolf->surface_tmp == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_LoadBMP() ");
-	wolf->wall_brick_img.texture = SDL_CreateTextureFromSurface(wolf->renderer, wolf->surface_tmp);
-	if (wolf->wall_brick_img.texture == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateTextureFromSurface() ");
-	SDL_FreeSurface(wolf->surface_tmp);
-	SDL_QueryTexture(wolf->wall_brick_img.texture,
-					&wolf->wall_brick_img.format,
-					&wolf->wall_brick_img.access,
-					&wolf->wall_brick_img. width,
-					&wolf->wall_brick_img.height);
-	printf("texture format = %d\n", wolf->wall_brick_img.format);		//DEBUG
-	printf("texture width = %d\n", wolf->wall_brick_img.width);		//DEBUG
-	printf("texture height = %d\n", wolf->wall_brick_img.height);		//DEBUG
-}
-
 void			ft_load_surface(t_env *wolf)
 {
 	wolf->surface_wall = SDL_LoadBMP("textures/gray_wall.bmp");
@@ -98,7 +77,6 @@ void			ft_sdl(t_env *wolf)
 {
 	ft_init_window_renderer(wolf);
 	ft_init_renderer_texture(wolf);
-	//ft_load_img(wolf);
 	ft_load_surface(wolf);
 	ft_print(wolf);
 	ft_key_hook(wolf);

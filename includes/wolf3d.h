@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/19 17:41:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/21 12:35:01 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ typedef enum	e_cardinal_point
 	EAST
 }				t_cardinal_point; 
 
-/* typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point; */
-
 typedef struct	s_map
 {
 	int			nbl;
@@ -100,5 +94,11 @@ void		ft_sdl(t_env *wolf);
 void		ft_key_hook(t_env *wolf);
 void		ft_exit(t_env *wolf, int exit_type, char *message);
 void		ft_print(t_env *wolf);
+void		ft_initialize(t_env *wolf, char *mapfile);
+void		ft_init_map(t_env *wolf, char *mapfile);
+void        ft_movement(t_env *wolf);
+void        ft_stop_movement(t_env *wolf);
+void        ft_settings(t_env *wolf);
+void    	ft_refresh_new_pos(t_env *wolf);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/01/30 17:16:19 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/06/21 12:34:08 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,10 @@ SRC_NAME += wolf3d.c
 SRC_NAME += sdl_start_up.c
 SRC_NAME += key_hook.c
 SRC_NAME += image.c
+SRC_NAME += init.c
+SRC_NAME += init_map.c
+SRC_NAME += key_binding.c
+SRC_NAME += refresh_pos.c
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

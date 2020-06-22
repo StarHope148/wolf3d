@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/22 13:42:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 13:48:54 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct	s_env
 	SDL_Event 		event;
 	t_map			mapdata;
 	t_camera		cam;
-	Uint32			*pixels;
+	Uint32			*screen_pixels;
 	SDL_Surface		*surface_wall;
 	char			orientation;
 	double			precision;

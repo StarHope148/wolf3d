@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/19 17:33:40 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 13:49:31 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,9 @@ uint32_t	RGBA_to_uint32(unsigned char r, unsigned char g, unsigned char b, unsig
 
 void	ft_print(t_env *wolf)
 {
-	
-	int	i;
-	int	j;
-
 	int		pitch;
-	SDL_bool done;
-
-	int		x;
-	int		y;
-	int		def_x;
-	int		def_y;
 	
-	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->pixels), &pitch);
+	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->screen_pixels), &pitch);
 	SDL_LockSurface(wolf->surface_wall);
 	Uint32 *pixels_wall = wolf->surface_wall->pixels;
 	
@@ -129,7 +119,7 @@ void	ft_print(t_env *wolf)
 		while (yRender < HEIGHT)
 		{
 			if (yRender < Ceiling) // UP
-				wolf->pixels[yRender * WIDTH + xRender] = DODGER_BLUE;
+				wolf->screen_pixels[yRender * WIDTH + xRender] = DODGER_BLUE;
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
 			{
 				sampleY = ((double)yRender - (double)Ceiling) / ((double)Floor - (double)Ceiling);
@@ -137,7 +127,7 @@ void	ft_print(t_env *wolf)
 
 				int surfaceY = sampleY * wolf->surface_wall->w;
 				int	surfaceX = sampleX * wolf->surface_wall->h;
-				wolf->pixels[yRender * WIDTH + xRender] = pixels_wall[surfaceY * wolf->surface_wall->w + surfaceX]; // brick_wall "texturing"
+				wolf->screen_pixels[yRender * WIDTH + xRender] = pixels_wall[surfaceY * wolf->surface_wall->w + surfaceX]; // brick_wall "texturing"
 				
 				//CARDINAL COLORING
 				/* if (wolf->orientation == NORTH)
@@ -153,7 +143,7 @@ void	ft_print(t_env *wolf)
 				//wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(255 * shading, 255 * shading, 255 * shading, 0); //non textured wall
 			}
 			else  //DOWN
-				wolf->pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 255 * ((yRender - HEIGHT * 0.5) / HEIGHT), 0, 0);
+				wolf->screen_pixels[yRender * WIDTH + xRender] = RGBA_to_uint32(0, 255 * ((yRender - HEIGHT * 0.5) / HEIGHT), 0, 0);
 			yRender++;
 		}
 		xRender++;
@@ -161,6 +151,14 @@ void	ft_print(t_env *wolf)
 
 	//---------------------------------------------------------------------------------------------------------
 	//###### printing 2D map view from above + red dot for camera location ######
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+	int		def_x;
+	int		def_y;
+	SDL_bool done;
+	
 	i = 0;
 	while (i < (int)wolf->mapdata.nbl)
 	{
@@ -175,7 +173,7 @@ void	ft_print(t_env *wolf)
 			if (wolf->mapdata.map[i][j] == WALL)
 				while (done == 0)
 				{
-					wolf->pixels[y * WIDTH + x] = LIME;
+					wolf->screen_pixels[y * WIDTH + x] = LIME;
 					//pixels[(y + BLOCK)* WIDTH + x + BLOCK] = 0xFF000000;  //<--- opposite corner position of block
 					x++;
 					if (x > def_x + BLOCK)
@@ -189,7 +187,7 @@ void	ft_print(t_env *wolf)
 			else if (wolf->mapdata.map[i][j] == EMPTY)
 				while (done == 0)
 				{
-					wolf->pixels[y * WIDTH + x] = GRAY;
+					wolf->screen_pixels[y * WIDTH + x] = GRAY;
 					x++;
 					if (x > def_x + BLOCK)
 					{

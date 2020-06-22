@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/21 12:31:58 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 13:44:48 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void        ft_settings(t_env *wolf)
 		//printf("case = %c\n", wolf->mapdata.map[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x]);
 		printf("angle = %f\n", wolf->cam.angle);
 	}
-	else
-		printf("keycode = %d\n", wolf->event.key.keysym.sym);		//DEBUG
 }
 
 void        ft_movement(t_env *wolf)

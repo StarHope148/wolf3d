@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/21 12:06:17 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 13:49:56 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->renderer = NULL;
 	wolf->texture = NULL;
 	wolf->format = NULL;
-	wolf->pixels = NULL;
+	wolf->screen_pixels = NULL;
 	wolf->mapdata.nbcol = 0;
 	wolf->mapdata.nbl = 0;
 	wolf->mapdata.cur_line = 0;

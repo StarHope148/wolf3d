@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/21 12:35:16 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 13:45:38 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_key_pressed(t_env *wolf)
 	else if (wolf->event.key.keysym.sym == SDLK_KP_PLUS ||
 			wolf->event.key.keysym.sym == SDLK_KP_MINUS)
 		ft_settings(wolf);
+	else
+		printf("keycode = %d\n", wolf->event.key.keysym.sym);		//DEBUG
 }
 
 void	ft_key_hook(t_env *wolf)

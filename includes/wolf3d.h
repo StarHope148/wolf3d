@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/21 12:35:01 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 13:42:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define MAX_DEPTH 20
 # define RAY_LENGHT 0.01
-# define RAY_LENGHT_STEP 0.01
+# define RAY_LENGHT_STEP 0.05
 # define SHADING_DEPTH 0.05
 # define BLOCK HEIGHT * 0.01
 # define WALL_SIZE 0.8

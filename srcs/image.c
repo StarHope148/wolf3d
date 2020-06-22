@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/22 13:49:31 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 20:28:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@ void	ft_print(t_env *wolf)
 	int		pitch;
 	
 	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->screen_pixels), &pitch);
-	SDL_LockSurface(wolf->surface_wall);
-	Uint32 *pixels_wall = wolf->surface_wall->pixels;
+	SDL_LockSurface(wolf->surface_wall_north);
+	SDL_LockSurface(wolf->surface_wall_south);
+	SDL_LockSurface(wolf->surface_wall_east);
+	SDL_LockSurface(wolf->surface_wall_west);
+	Uint32 *pixels_wall_north = wolf->surface_wall_north->pixels;
+	Uint32 *pixels_wall_south = wolf->surface_wall_south->pixels;
+	Uint32 *pixels_wall_west = wolf->surface_wall_west->pixels;
+	Uint32 *pixels_wall_east = wolf->surface_wall_east->pixels;
+
 	
 	//---------------------------------------------------------------------------------------------------------
 
@@ -63,11 +70,33 @@ void	ft_print(t_env *wolf)
 				distanceToWall = MAX_DEPTH;
 			}
 			else if (wolf->mapdata.map[TestY][TestX] == WALL)
-			{
-				distanceToWall *= cos(wolf->cam.angle - RayAngle); //fix fisheye distorsion
-				hitWall = 1; 
-			}
+				hitWall = 1;
+
+
 		}
+
+		//Check if there is no # a bit before the end of the ray casted
+		/* double TestX_before;
+		double	TestY_before;
+		double before;
+		int hitbefore;
+
+		before = 0.1;
+		int inc = 0;
+		hitbefore = 0;
+		TestX_before = TestX;
+		TestY_before = TestY;
+		while (hitbefore == 0 && distanceToWall > 0)
+		{
+			TestX_before -= before;
+			TestY_before -= before;
+
+			if (wolf->mapdata.map[(int)TestY_before][(int)TestX_before] == WALL)
+			{
+				distanceToWall *= before * inc;
+				hitbefore = 1;
+			}
+		} */
 
 		//--------------------------------------
 		// Determine where X and Y of the wall has been collided
@@ -75,42 +104,41 @@ void	ft_print(t_env *wolf)
 		double sampleX;
 		double sampleY;
 
-		double BlockMidX = (double)TestX + 0.5;
-		double BlockMidY = (double)TestY + 0.5;
+		double BlockMidX = (double)(TestX) + 0.5;
+		double BlockMidY = (double)(TestY) + 0.5;
 
 		double TestPointX = wolf->cam.pos_x + EyeX * distanceToWall;
 		double TestPointY = wolf->cam.pos_y + EyeY * distanceToWall;
 
-		double fTestAngle = atan2((TestPointY - BlockMidY), (TestPointX - BlockMidX));
+		
+		double testAngle = atan2((TestPointY - BlockMidY), (TestPointX - BlockMidX));
 
-		if (fTestAngle >= -PI * 0.25 && fTestAngle < PI * 0.25)		//WEST
+		sampleX = 0;
+		if (testAngle >= -PI * 0.25 && testAngle <= PI * 0.25)		//WEST
 		{
 			sampleX = TestPointY - (double)TestY - 1;
 			wolf->orientation = WEST;
-			//printf("case WEST\n");
 		}
-		if (fTestAngle >= PI * 0.25 && fTestAngle < PI * 0.75)		//NORTH
+		else if (testAngle >= PI * 0.25 && testAngle <= PI * 0.75)		//NORTH
 		{
 			sampleX = TestPointX - (double)TestX;
 			wolf->orientation = NORTH;
-			//printf("case NORTH\n");
 		}
-		if (fTestAngle < -PI * 0.25 && fTestAngle >= -PI * 0.75)	//SOUTH
+		else if (testAngle <= -PI * 0.25 && testAngle >= -PI * 0.75)	//SOUTH
 		{
 			sampleX = TestPointX - (double)TestX - 1;
 			wolf->orientation = SOUTH;
-			//printf("case SOUTH\n");
 		}
-		if (fTestAngle >= PI * 0.75 || fTestAngle < -PI * 0.75)		//EAST
+		else if (testAngle >= PI * 0.75 || testAngle <= -PI * 0.75)		//EAST
 		{
 			sampleX = TestPointY - (double)TestY;
 			wolf->orientation = EAST;
-			//printf("case EAST\n");
 		}
 
 		sampleX = fabs(sampleX - (int)sampleX);
 		//----------------------------------------
 		//printf("distanceToWall = %f\n", distanceToWall);			//DEBUG
+		distanceToWall *= cos(wolf->cam.angle - RayAngle); //fix fisheye distorsion
 		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / distanceToWall * WALL_SIZE;		
 		int Floor = HEIGHT - Ceiling;
 
@@ -123,12 +151,32 @@ void	ft_print(t_env *wolf)
 			else if (yRender >= Ceiling && yRender <= Floor) // WALL
 			{
 				sampleY = ((double)yRender - (double)Ceiling) / ((double)Floor - (double)Ceiling);
-				//sampleY = fabs(sampleY - (int)sampleY);
+				sampleY = fabs(sampleY - (int)sampleY);
 
-				int surfaceY = sampleY * wolf->surface_wall->w;
-				int	surfaceX = sampleX * wolf->surface_wall->h;
-				wolf->screen_pixels[yRender * WIDTH + xRender] = pixels_wall[surfaceY * wolf->surface_wall->w + surfaceX]; // brick_wall "texturing"
-				
+				if (wolf->orientation == NORTH)
+				{
+					int surfaceY = sampleY * wolf->surface_wall_north->w;
+					int	surfaceX = sampleX * wolf->surface_wall_north->h;
+					wolf->screen_pixels[yRender * WIDTH + xRender] = pixels_wall_north[surfaceY * wolf->surface_wall_north->w + surfaceX]; // brick_wall "texturing"
+				}
+				else if (wolf->orientation == SOUTH)
+				{
+					int surfaceY = sampleY * wolf->surface_wall_south->w;
+					int	surfaceX = sampleX * wolf->surface_wall_south->h;
+					wolf->screen_pixels[yRender * WIDTH + xRender] = pixels_wall_south[surfaceY * wolf->surface_wall_south->w + surfaceX]; // brick_wall "texturing"
+				}
+				else if (wolf->orientation == EAST)
+				{
+					int surfaceY = sampleY * wolf->surface_wall_east->w;
+					int	surfaceX = sampleX * wolf->surface_wall_east->h;
+					wolf->screen_pixels[yRender * WIDTH + xRender] = pixels_wall_east[surfaceY * wolf->surface_wall_east->w + surfaceX]; // brick_wall "texturing"
+				}
+				else if (wolf->orientation == WEST)
+				{
+					int surfaceY = sampleY * wolf->surface_wall_west->w;
+					int	surfaceX = sampleX * wolf->surface_wall_west->h;
+					wolf->screen_pixels[yRender * WIDTH + xRender] = pixels_wall_west[surfaceY * wolf->surface_wall_west->w + surfaceX]; // brick_wall "texturing"
+				}
 				//CARDINAL COLORING
 				/* if (wolf->orientation == NORTH)
 					wolf->pixels[yRender * WIDTH + xRender] = RED; // cardinal coloring
@@ -148,7 +196,7 @@ void	ft_print(t_env *wolf)
 		}
 		xRender++;
 	}
-
+	
 	//---------------------------------------------------------------------------------------------------------
 	//###### printing 2D map view from above + red dot for camera location ######
 	int		i;
@@ -234,7 +282,11 @@ void	ft_print(t_env *wolf)
 
 	// ###### DISPLAYING ######
 	SDL_UnlockTexture(wolf->texture);
-	SDL_UnlockSurface(wolf->surface_wall);
+	SDL_UnlockSurface(wolf->surface_wall_north);
+	SDL_UnlockSurface(wolf->surface_wall_south);
+	SDL_UnlockSurface(wolf->surface_wall_east);
+	SDL_UnlockSurface(wolf->surface_wall_west);
+
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
 
 

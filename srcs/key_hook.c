@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/22 13:45:38 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/22 16:25:52 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ft_key_pressed(t_env *wolf)
 			wolf->event.key.keysym.sym == SDLK_LEFT)
 		ft_movement(wolf);
 	else if (wolf->event.key.keysym.sym == SDLK_KP_PLUS ||
-			wolf->event.key.keysym.sym == SDLK_KP_MINUS)
+			wolf->event.key.keysym.sym == SDLK_KP_MINUS ||
+			wolf->event.key.keysym.sym == SDLK_x)
 		ft_settings(wolf);
 	else
 		printf("keycode = %d\n", wolf->event.key.keysym.sym);		//DEBUG

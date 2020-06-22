@@ -2,6 +2,7 @@ TODO :
 
 - segfault if minimaps drawing exceeds WIDTH or HEIGHT of window (trying to access pixel offscreen)
 
+
 - add smooth sliding while colliding on walls depending of angle
 
 - check leaks when exiting :
@@ -21,3 +22,4 @@ DONE :
 - added simple collision detection
 - add texture loader
 - then texture the world
+- set spawn point dynamically

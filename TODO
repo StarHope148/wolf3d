@@ -22,4 +22,5 @@ DONE :
 - added simple collision detection
 - add texture loader
 - then texture the world
+- map format testing
 - set spawn point dynamically

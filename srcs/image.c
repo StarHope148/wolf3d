@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 15:20:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 18:16:33 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,47 +93,39 @@ void	ft_print(t_env *wolf)
 		//--------------------------------------
 		// Determine where X and Y of the wall has been collided
 	
-		double sampleX;
-		double sampleY;
-
-		double BlockMidX = (double)(wolf->raycast.test_x) + 0.5;
-		double BlockMidY = (double)(wolf->raycast.test_y) + 0.5;
-
-		double TestPointX = wolf->cam.pos_x + wolf->raycast.eye_x * wolf->raycast.distance_towall;
-		double TestPointY = wolf->cam.pos_y + wolf->raycast.eye_y * wolf->raycast.distance_towall;
-
-		
-		double testAngle = atan2((TestPointY - BlockMidY), (TestPointX - BlockMidX));
-
-		sampleX = 0;
-		if (testAngle >= -PI * 0.25 && testAngle <= PI * 0.25)		//WEST
+		wolf->calc.block_mid_x = (double)(wolf->raycast.test_x) + 0.5;
+		wolf->calc.block_mid_y = (double)(wolf->raycast.test_y) + 0.5;
+		wolf->calc.test_point_x = wolf->cam.pos_x + wolf->raycast.eye_x * wolf->raycast.distance_towall;
+		wolf->calc.test_point_y = wolf->cam.pos_y + wolf->raycast.eye_y * wolf->raycast.distance_towall;
+		wolf->calc.test_angle = atan2((wolf->calc.test_point_y - wolf->calc.block_mid_y), (wolf->calc.test_point_x - wolf->calc.block_mid_x));
+		wolf->calc.sample_x = 0;
+		if (wolf->calc.test_angle >= -PI * 0.25 && wolf->calc.test_angle <= PI * 0.25)
 		{
-			sampleX = TestPointY - (double)wolf->raycast.test_y - 1;
+			wolf->calc.sample_x = wolf->calc.test_point_y - (double)wolf->raycast.test_y - 1;
 			wolf->orientation = WEST;
 		}
-		else if (testAngle >= PI * 0.25 && testAngle <= PI * 0.75)		//NORTH
+		else if (wolf->calc.test_angle >= PI * 0.25 && wolf->calc.test_angle <= PI * 0.75)
 		{
-			sampleX = TestPointX - (double)wolf->raycast.test_x;
+			wolf->calc.sample_x = wolf->calc.test_point_x - (double)wolf->raycast.test_x;
 			wolf->orientation = NORTH;
 		}
-		else if (testAngle <= -PI * 0.25 && testAngle >= -PI * 0.75)	//SOUTH
+		else if (wolf->calc.test_angle <= -PI * 0.25 && wolf->calc.test_angle >= -PI * 0.75)
 		{
-			sampleX = TestPointX - (double)wolf->raycast.test_x - 1;
+			wolf->calc.sample_x = wolf->calc.test_point_x - (double)wolf->raycast.test_x - 1;
 			wolf->orientation = SOUTH;
 		}
-		else if (testAngle >= PI * 0.75 || testAngle <= -PI * 0.75)		//EAST
+		else if (wolf->calc.test_angle >= PI * 0.75 || wolf->calc.test_angle <= -PI * 0.75)
 		{
-			sampleX = TestPointY - (double)wolf->raycast.test_y;
+			wolf->calc.sample_x = wolf->calc.test_point_y - (double)wolf->raycast.test_y;
 			wolf->orientation = EAST;
 		}
+		wolf->calc.sample_x = fabs(wolf->calc.sample_x - (int)wolf->calc.sample_x);
 
-		sampleX = fabs(sampleX - (int)sampleX);
 		//----------------------------------------
-		//printf("wolf->raycast.distance_towall = %f\n", wolf->raycast.distance_towall);			//DEBUG
+		
 		wolf->raycast.distance_towall *= cos(wolf->cam.angle - wolf->raycast.ray_angle); //fix fisheye distorsion
 		int Ceiling = (double)(HEIGHT / 2) - (double)HEIGHT / wolf->raycast.distance_towall * WALL_SIZE;		
 		int Floor = HEIGHT - Ceiling;
-
 
 		wolf->raycast.y_render = 0;
 		while (wolf->raycast.y_render < HEIGHT)
@@ -142,31 +134,31 @@ void	ft_print(t_env *wolf)
 				wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = DODGER_BLUE;
 			else if (wolf->raycast.y_render >= Ceiling && wolf->raycast.y_render <= Floor) // WALL
 			{
-				sampleY = ((double)wolf->raycast.y_render - (double)Ceiling) / ((double)Floor - (double)Ceiling);
-				sampleY = fabs(sampleY - (int)sampleY);
+				wolf->calc.sample_y = ((double)wolf->raycast.y_render - (double)Ceiling) / ((double)Floor - (double)Ceiling);
+				wolf->calc.sample_y = fabs(wolf->calc.sample_y - (int)wolf->calc.sample_y);
 
 				if (wolf->orientation == NORTH)
 				{
-					int surfaceY = sampleY * wolf->surface_wall_north->w;
-					int	surfaceX = sampleX * wolf->surface_wall_north->h;
+					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_north->w;
+					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_north->h;
 					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_north[surfaceY * wolf->surface_wall_north->w + surfaceX]; // brick_wall "texturing"
 				}
 				else if (wolf->orientation == SOUTH)
 				{
-					int surfaceY = sampleY * wolf->surface_wall_south->w;
-					int	surfaceX = sampleX * wolf->surface_wall_south->h;
+					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_south->w;
+					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_south->h;
 					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_south[surfaceY * wolf->surface_wall_south->w + surfaceX]; // brick_wall "texturing"
 				}
 				else if (wolf->orientation == EAST)
 				{
-					int surfaceY = sampleY * wolf->surface_wall_east->w;
-					int	surfaceX = sampleX * wolf->surface_wall_east->h;
+					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_east->w;
+					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_east->h;
 					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_east[surfaceY * wolf->surface_wall_east->w + surfaceX]; // brick_wall "texturing"
 				}
 				else if (wolf->orientation == WEST)
 				{
-					int surfaceY = sampleY * wolf->surface_wall_west->w;
-					int	surfaceX = sampleX * wolf->surface_wall_west->h;
+					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_west->w;
+					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_west->h;
 					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_west[surfaceY * wolf->surface_wall_west->w + surfaceX]; // brick_wall "texturing"
 				}
 				//CARDINAL COLORING

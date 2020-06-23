@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/06/22 13:42:11 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/06/23 18:22:14 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = wolf3d
 
 INC_NAME += wolf3d.h
 INC_NAME += colors.h
+INC_NAME += defines.h
 
 SRC_NAME += main.c
 SRC_NAME += wolf3d.c

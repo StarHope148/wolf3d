@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 18:06:40 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 18:19:42 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "defines.h"
 # include "colors.h"
-
-# define TRUE 1
-# define FALSE 0
-
-# define PI 3.14159
-
-# define WIDTH 1000
-# define HEIGHT 800
-
-# define FOV PI / 3
-
-# define MAX_DEPTH 20
-# define RAY_LENGHT 0.005
-# define RAY_LENGHT_STEP 0.005
-# define SHADING_DEPTH 0.05
-# define BLOCK HEIGHT * 0.01
-# define WALL_SIZE 0.75
-
-# define MOVE_SPEED 0.025
-# define ROTATE_SPEED 0.025
-
-# define WALL '#'
-# define EMPTY '.'
 
 typedef enum	e_cardinal_point
 {
@@ -90,13 +68,13 @@ typedef struct	s_raycast		//need to init this
 
 typedef struct s_calc
 {
-	double sampleX;
-	double sampleY;
-	double BlockMidX;
-	double BlockMidY;
-	double TestPointX;
-	double TestPointY;
-	double testAngle;
+	double sample_x;
+	double sample_y;
+	double block_mid_x;
+	double block_mid_y;
+	double test_point_x;
+	double test_point_y;
+	double test_angle;
 }				t_calc;
 
 typedef struct	s_env

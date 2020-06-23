@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 18:19:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 18:36:51 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,18 @@ typedef struct	s_env
 	t_camera		cam;
 	Uint32			*screen_pixels;
 	SDL_Surface		*surface_wall_north;
+	Uint32			*pixels_wall_north;
 	SDL_Surface		*surface_wall_south;
+	Uint32			*pixels_wall_south;
 	SDL_Surface		*surface_wall_east;
+	Uint32			*pixels_wall_east;
 	SDL_Surface		*surface_wall_west;
+	Uint32			*pixels_wall_west;
 	t_raycast		raycast;
 	t_calc			calc;
 	char			orientation;
 	double			precision;
+	int				pitch;
 }				t_env;
 
 void		ft_wolf3d(char *mapfile);

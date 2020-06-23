@@ -6,30 +6,20 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 18:16:33 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 19:31:42 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-uint32_t	RGBA_to_uint32(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
-	return ((r << 24) + (g << 16) + (b << 8) + a);
-}
-
 void	ft_print(t_env *wolf)
 {
-	int		pitch;
 	
-	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->screen_pixels), &pitch);
-	//SDL_LockSurface(wolf->surface_wall_north);
-	//SDL_LockSurface(wolf->surface_wall_south);
-	//SDL_LockSurface(wolf->surface_wall_east);
-	//SDL_LockSurface(wolf->surface_wall_west);
-	Uint32 *pixels_wall_north = wolf->surface_wall_north->pixels;
-	Uint32 *pixels_wall_south = wolf->surface_wall_south->pixels;
-	Uint32 *pixels_wall_west = wolf->surface_wall_west->pixels;
-	Uint32 *pixels_wall_east = wolf->surface_wall_east->pixels;
+	SDL_LockTexture(wolf->texture, NULL, (void *)&(wolf->screen_pixels), &(wolf->pitch));
+	wolf->pixels_wall_north = wolf->surface_wall_north->pixels;
+	wolf->pixels_wall_south = wolf->surface_wall_south->pixels;
+	wolf->pixels_wall_west = wolf->surface_wall_west->pixels;
+	wolf->pixels_wall_east = wolf->surface_wall_east->pixels;
 
 	//---------------------------------------------------------------------------------------------------------
 
@@ -141,25 +131,25 @@ void	ft_print(t_env *wolf)
 				{
 					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_north->w;
 					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_north->h;
-					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_north[surfaceY * wolf->surface_wall_north->w + surfaceX]; // brick_wall "texturing"
+					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = wolf->pixels_wall_north[surfaceY * wolf->surface_wall_north->w + surfaceX]; // brick_wall "texturing"
 				}
 				else if (wolf->orientation == SOUTH)
 				{
 					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_south->w;
 					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_south->h;
-					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_south[surfaceY * wolf->surface_wall_south->w + surfaceX]; // brick_wall "texturing"
+					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = wolf->pixels_wall_south[surfaceY * wolf->surface_wall_south->w + surfaceX]; // brick_wall "texturing"
 				}
 				else if (wolf->orientation == EAST)
 				{
 					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_east->w;
 					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_east->h;
-					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_east[surfaceY * wolf->surface_wall_east->w + surfaceX]; // brick_wall "texturing"
+					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = wolf->pixels_wall_east[surfaceY * wolf->surface_wall_east->w + surfaceX]; // brick_wall "texturing"
 				}
 				else if (wolf->orientation == WEST)
 				{
 					int surfaceY = wolf->calc.sample_y * wolf->surface_wall_west->w;
 					int	surfaceX = wolf->calc.sample_x * wolf->surface_wall_west->h;
-					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = pixels_wall_west[surfaceY * wolf->surface_wall_west->w + surfaceX]; // brick_wall "texturing"
+					wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = wolf->pixels_wall_west[surfaceY * wolf->surface_wall_west->w + surfaceX]; // brick_wall "texturing"
 				}
 				//CARDINAL COLORING
 				/* if (wolf->orientation == NORTH)
@@ -175,7 +165,7 @@ void	ft_print(t_env *wolf)
 				//wolf->pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = RGBA_to_uint32(255 * wolf->raycast.shading, 255 * wolf->raycast.shading, 255 * wolf->raycast.shading, 0); //non textured wall
 			}
 			else  //DOWN
-				wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = RGBA_to_uint32(0, 255 * ((wolf->raycast.y_render - HEIGHT * 0.5) / HEIGHT), 0, 0);
+				wolf->screen_pixels[wolf->raycast.y_render * WIDTH + wolf->raycast.x_render] = rgba_to_uint32(0, 255 * ((wolf->raycast.y_render - HEIGHT * 0.5) / HEIGHT), 0, 0);
 			wolf->raycast.y_render++;
 		}
 		wolf->raycast.x_render++;
@@ -234,7 +224,6 @@ void	ft_print(t_env *wolf)
 		i++;
 	}
 	
-
 	// TESTING IMAGE COPY PIXEL BY PIXEL ON SCREEN
 	/* wolf->raycast.y_render = 10;
 	int	imgX = 0;
@@ -257,22 +246,9 @@ void	ft_print(t_env *wolf)
 	
 	//---------------------------------------------------------------------------------------------------------
 
-	//display wall_brick texture for testing
-	//for (int texture_y = 0; texture_y < wolf->wall_brick_img.height; texture_y++)
-	//	for (int texture_x = 0; texture_x < wolf->wall_brick_img.width; texture_x++)
-	//		wolf->pixels[texture_y * WIDTH + texture_x] = wolf->wall_brick_img.pixels[texture_y * wolf->wall_brick_img.width + texture_x];
-		
-	
-
 	// ###### DISPLAYING ######
 	SDL_UnlockTexture(wolf->texture);
-	//SDL_UnlockSurface(wolf->surface_wall_north);
-	//SDL_UnlockSurface(wolf->surface_wall_south);
-	//SDL_UnlockSurface(wolf->surface_wall_east);
-	//SDL_UnlockSurface(wolf->surface_wall_west);
-
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
-
 
 	// TESTING IMAGE COPY ON SCREEN
 	//SDL_Rect test1 = {0, 0, 636, 639};

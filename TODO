@@ -1,10 +1,22 @@
-TODO :
+### TODO ###
 
+- clean the code and norm everything
+
+_______________________________________________________
+
+### DONE ###
+
+
+- strafing controls not working
+- fix controls responsiveness
+- fix render and minimap movememt/rotation relation
+- fix fisheye effect
+- added simple collision detection
 - segfault if minimaps drawing exceeds WIDTH or HEIGHT of window (trying to access pixel offscreen)
-
-
-- add smooth sliding while colliding on walls depending of angle
-
+- add texture loader
+- then texture the world
+- map format testing
+- set spawn point dynamically
 - check leaks when exiting :
 	__attribute__((destructor)) void no_end(void);
 	void    no_end(void)
@@ -12,15 +24,8 @@ TODO :
 		while (1);
 	}
 
+_______________________________________________________
 
-DONE :
+### DISCARDED ###
 
-- strafing controls not working
-- fix controls responsiveness
-- fix render and minimap movememt/rotation relation
-- fix fisheye effect
-- added simple collision detection
-- add texture loader
-- then texture the world
-- map format testing
-- set spawn point dynamically
+- add smooth sliding while colliding on walls depending of angle

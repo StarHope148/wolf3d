@@ -24,7 +24,7 @@ SRC_NAME += init.c
 SRC_NAME += init_map.c
 SRC_NAME += key_binding.c
 SRC_NAME += refresh_pos.c
-
+SRC_NAME += map_checker.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

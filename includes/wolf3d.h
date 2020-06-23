@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/22 19:12:59 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 18:05:01 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef enum	e_cardinal_point
 	SOUTH,
 	WEST,
 	EAST
-}				t_cardinal_point; 
+}				t_cardinal_point;
 
 typedef struct	s_map
 {
@@ -73,6 +73,31 @@ typedef struct	s_camera
 	size_t		rotate_left;
 	size_t		rotate_right;
 }				t_camera;
+
+typedef struct	s_raycast		//need to init this
+{
+	int		x_render;
+	int		y_render;
+	double 	eye_x;
+	double 	eye_y;
+	int		test_x;
+	int		test_y;
+	double	ray_angle;
+	double	distance_towall;
+	int		hit_wall;
+	double	shading;
+}				t_raycast;
+
+typedef struct s_calc
+{
+	double sampleX;
+	double sampleY;
+	double BlockMidX;
+	double BlockMidY;
+	double TestPointX;
+	double TestPointY;
+	double testAngle;
+}				t_calc;
 
 typedef struct	s_env
 {
@@ -103,5 +128,9 @@ void        ft_movement(t_env *wolf);
 void        ft_stop_movement(t_env *wolf);
 void        ft_settings(t_env *wolf);
 void    	ft_refresh_new_pos(t_env *wolf);
+void    	ft_error(int code, char *line);
+int			ft_check_line(char *line);
+int			ft_check_borders(char *line);
+void 		ft_norme(int code);
 
 #endif

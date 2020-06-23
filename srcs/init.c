@@ -23,10 +23,9 @@ void	ft_init_env(t_env *wolf)
 	wolf->mapdata.nbl = 0;
 	wolf->mapdata.cur_line = 0;
 	wolf->mapdata.map = NULL;
-
 	wolf->cam.pos_x = 0;
 	wolf->cam.pos_y = 0;
-	wolf->cam.angle = PI/2;
+	wolf->cam.angle = PI / 2;
 	wolf->cam.fov = FOV;
 	wolf->cam.strafe_left = 0;
 	wolf->cam.strafe_right = 0;
@@ -34,39 +33,38 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.backward = 0;
 	wolf->cam.rotate_left = 0;
 	wolf->cam.rotate_right = 0;
-
 	wolf->precision = RAY_LENGHT;
 }
 
 void	ft_setspawn(t_env *wolf)
 {
-	int		x;
-	int	 	y;
+	int x;
+	int y;
 
 	x = 1;
 	y = 1;
 	while (wolf->mapdata.map[y][x] != EMPTY)
 	{
-		if (x < wolf->mapdata.nbl)
-			x++;
-		if ((x == wolf->mapdata.nbl) && (y < wolf->mapdata.nbcol)) 
-		{
-			x = 1;
+		if (y < wolf->mapdata.nbl)
 			y++;
-		}
-		if ((x == wolf->mapdata.nbl) && (y == wolf->mapdata.nbcol))
+		if ((y == wolf->mapdata.nbl) && (x < wolf->mapdata.nbcol))
 		{
-				ft_putendl_fd("This is no map, just a brick wall", 2);
-				exit(EXIT_FAILURE);
+			y = 1;
+			x++;
+		}
+		if ((y == wolf->mapdata.nbl) && (x == wolf->mapdata.nbcol))
+		{
+			ft_putendl_fd("This is no map, just a brick wall", 2);
+			exit(EXIT_FAILURE);
 		}
 	}
 	wolf->cam.pos_x = x + .5;
 	wolf->cam.pos_y = y + .5;
 }
 
-void		ft_initialize(t_env *wolf, char *mapfile)
+void	ft_initialize(t_env *wolf, char *mapfile)
 {
-    ft_init_env(wolf);
+	ft_init_env(wolf);
 	ft_init_map(wolf, mapfile);
 	ft_setspawn(wolf);
 }

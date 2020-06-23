@@ -12,12 +12,6 @@
 
 #include "wolf3d.h"
 
-int		ft_error(void)
-{
-	ft_putendl_fd("an error occured", 2);
-	return (EXIT_FAILURE);
-}
-
 int		ft_usage(void)
 {
 	ft_putendl_fd("usage: ./wolf3d [file.map]", 2);

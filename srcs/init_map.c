@@ -12,19 +12,17 @@
 
 #include "wolf3d.h"
 
-char		**ft_malloc_tab(t_env *wolf)
+char	**ft_malloc_tab(t_env *wolf)
 {
 	char	**tab;
-	int			i;
+	int		i;
 
-	if ((tab = (char **)malloc(sizeof(char *)
-			* wolf->mapdata.nbl)) == NULL)
+	if ((tab = (char **)malloc(sizeof(char *) * wolf->mapdata.nbl)) == NULL)
 		return (NULL);
 	i = 0;
 	while (i < wolf->mapdata.nbl)
 	{
-		if ((tab[i] = (char *)malloc(sizeof(char)
-				* wolf->mapdata.nbcol)) == NULL)
+		if (!(tab[i] = (char *)malloc(sizeof(char) * wolf->mapdata.nbcol)))
 			return (NULL);
 		i++;
 	}
@@ -42,112 +40,44 @@ int		ft_retrieve_data(t_env *wolf, char *line)
 	return (0);
 }
 
-int		ft_check_borders(char *line)
-{
-	int		i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != '#')
-			return (-1);
-		i++;
-	}
-	return (0);
-}
-
-int		ft_check_line(char *line)
-{
-	int		i;
-
-	i = 0;
-	if (line[i++] != '#')
-		return(-2);
-	while (line[i])
-	{
-		if (line[i] != '.' && line[i] != '#')
-			return (-1);
-		i++;
-	}
-	if (line[--i] != '#')
-		return(-2);
-	return (0);
-}
-
 void	ft_fill_map(t_env *wolf, int fd)
 {
 	char	*line;
 	char	ret;
 	int		i;
 
-	line = NULL;
 	i = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		if (ft_check_line(line) < 0 || i++ == 0 || i == wolf->mapdata.nbl)
 		{
 			if (ft_check_line(line) == -1)
-			{
-				ft_putendl_fd("map format is invalid", 2);
-				free(line);
-				exit(EXIT_FAILURE);
-			}
+				ft_error(3, line);
 			if ((ft_check_line(line) == -2) || (ft_check_borders(line) == -1))
-			{
-				ft_putendl_fd("Your map is missing borders, BUILD THAT WALL", 2);
-				free(line);
-				exit(EXIT_FAILURE);
-			}
-			/* while (*(wolf->mapdata.map))
-				free(*(wolf->mapdata.map)++);
-			if (wolf->mapdata.map != NULL)
-				free(wolf->mapdata.map); */
+				ft_error(4, line);
 		}
 		if (ft_retrieve_data(wolf, line) == -1)
-		{
-			ft_putendl_fd("error during malloc of map", 2);
-			free(line);
-			exit(EXIT_FAILURE);
-		}
+			ft_error(1, line);
 		free(line);
 	}
 	if (wolf->mapdata.nbl < 3 || wolf->mapdata.nbcol < 3)
 	{
 		ft_putendl_fd("wrong map format", 2);
-	//	if (line) 
-	//		free(line);
+		if (line)
+			free(line);
 		exit(EXIT_FAILURE);
-	}
-
-	//DEBUG MAP DISPLAY
-	i = 0;
-	printf("map_nbl = %d\tmap_nbcol = %d\n", wolf->mapdata.nbl, wolf->mapdata.nbcol);
-	while (i < wolf->mapdata.nbl)
-	{
-		printf("map[%d] =\t%s\n", i, wolf->mapdata.map[i]);
-		i++;
 	}
 }
 
-void	ft_count_lines_columns(t_env *wolf, char *mapfile)
+void	ft_count_lines_columns(t_env *wolf, char *mapfile, int fd)
 {
-	char		*line;
-	int			fd;
-	int			i;
+	char	*line;
+	int		i;
 
-
-	fd = 0;
 	if ((fd = open(mapfile, O_RDONLY)) < 0)
-	{
-		perror("Error during open() ");
-		exit(EXIT_FAILURE);
-	}
+		ft_norme(5);
 	if ((get_next_line(fd, &line)) <= 0)
-	{
-		ft_putendl_fd("map is empty", 2);
-		free(line);
-		exit(EXIT_FAILURE);
-	}
+		ft_error(6, line);
 	wolf->mapdata.nbcol = ft_strlen(line);
 	free(line);
 	wolf->mapdata.nbl++;
@@ -156,26 +86,22 @@ void	ft_count_lines_columns(t_env *wolf, char *mapfile)
 		i = ft_strlen(line);
 		if (wolf->mapdata.nbcol != i)
 		{
-			free(line);
-			write(1, "Please use a rectangle map\n", 28);
 			close(fd);
-			exit(EXIT_FAILURE);
+			ft_error(2, line);
 		}
 		wolf->mapdata.nbl++;
 		free(line);
 	}
 	if (close(fd) < 0)
-	{
-		perror("Error during close() ");
-		exit(EXIT_FAILURE);
-	}
+		ft_error(7, line);
 }
 
 void	ft_init_map(t_env *wolf, char *mapfile)
 {
-	int		fd;
+	int fd;
 
-	ft_count_lines_columns(wolf, mapfile);
+	fd = 0;
+	ft_count_lines_columns(wolf, mapfile, fd);
 	if ((fd = open(mapfile, O_RDONLY)) < 0)
 	{
 		perror("Error during open() ");

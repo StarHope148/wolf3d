@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 18:05:01 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 18:06:40 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ typedef struct	s_env
 	SDL_Surface		*surface_wall_south;
 	SDL_Surface		*surface_wall_east;
 	SDL_Surface		*surface_wall_west;
+	t_raycast		raycast;
+	t_calc			calc;
 	char			orientation;
 	double			precision;
 }				t_env;

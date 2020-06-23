@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/21 12:02:02 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 22:09:25 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_malloc_tab(t_env *wolf)
 	i = 0;
 	while (i < wolf->mapdata.nbl)
 	{
-		if (!(tab[i] = (char *)malloc(sizeof(char) * wolf->mapdata.nbcol)))
+		if (!(tab[i] = (char *)malloc(sizeof(char) * (wolf->mapdata.nbcol + 1))))
 			return (NULL);
 		i++;
 	}

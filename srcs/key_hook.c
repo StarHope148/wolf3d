@@ -28,7 +28,6 @@ void	ft_key_released(t_env *wolf)
 		wolf->cam.rotate_left = FALSE;
 }
 
-
 void	ft_key_pressed(t_env *wolf)
 {
 	if (wolf->event.key.keysym.sym == SDLK_ESCAPE)
@@ -45,25 +44,20 @@ void	ft_key_pressed(t_env *wolf)
 			wolf->event.key.keysym.sym == SDLK_x ||
 			wolf->event.key.keysym.sym == SDLK_SPACE)
 		ft_settings(wolf);
-	else
-		printf("keycode = %d\n", wolf->event.key.keysym.sym);		//DEBUG
 }
 
 void	ft_key_hook(t_env *wolf)
 {
 	while (1)
 	{
-    	SDL_PollEvent(&wolf->event);
+		SDL_PollEvent(&wolf->event);
 		if (wolf->event.type == SDL_KEYDOWN)
 			ft_key_pressed(wolf);
 		if (wolf->event.type == SDL_KEYUP)
 			ft_key_released(wolf);
 		else if (wolf->event.type == SDL_QUIT)
 			ft_exit(wolf, EXIT_SUCCESS, NULL);
-
-		//refresh new position
 		ft_refresh_new_pos(wolf);
-		
 		ft_print(wolf);
 	}
 }

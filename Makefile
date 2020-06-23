@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/06/23 21:30:38 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/06/23 23:16:06 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_NAME += sampling.c
 SRC_NAME += sampling_tools.c
 SRC_NAME += draw_textures.c
 SRC_NAME += minimap.c
+SRC_NAME += switch_textures.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -51,6 +52,7 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 #MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
 SDL2 = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0
 CFLAGS = -Wall -Wextra -Werror
+NORMINETTE = ~/.norminette/norminette.rb
 
 $(CC) = gcc
 
@@ -84,7 +86,7 @@ debug_clean:
 	$(RM) -rf a.out a.out.DSYM
 	
 norm:
-	norminette $(SRC) $(HEAD) $(LIB_PATH)
+	$(NORMINETTE) $(SRC) $(HEAD) $(LIB_PATH)
 
 ubuntu: $(OBJ)
 	make -C $(LIB_PATH)

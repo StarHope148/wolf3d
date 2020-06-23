@@ -12,9 +12,9 @@
 
 #include "wolf3d.h"
 
-void        ft_settings(t_env *wolf)
+void		ft_settings(t_env *wolf)
 {
-    if (wolf->event.key.keysym.sym == SDLK_KP_PLUS)
+	if (wolf->event.key.keysym.sym == SDLK_KP_PLUS)
 	{
 		if (wolf->precision - RAY_LENGHT_STEP > 0)
 			wolf->precision -= RAY_LENGHT_STEP;
@@ -29,7 +29,6 @@ void        ft_settings(t_env *wolf)
 	{
 		printf("---------------------\n");
 		printf("cam_x = %.2f\tcam_y = %.2f\n", wolf->cam.pos_x, wolf->cam.pos_y);	//DEBUG			
-		//printf("case = %c\n", wolf->mapdata.map[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x]);
 		printf("angle = %f\n", wolf->cam.angle);
 	}
 	else if (wolf->event.key.keysym.sym == SDLK_SPACE)
@@ -45,7 +44,7 @@ void        ft_settings(t_env *wolf)
 	}
 }
 
-void        ft_movement(t_env *wolf)
+void		ft_movement(t_env *wolf)
 {
 	if (wolf->event.key.keysym.sym == SDLK_w)
 		wolf->cam.forward = TRUE;

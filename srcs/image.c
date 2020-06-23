@@ -15,7 +15,7 @@
 void	ft_update_screen(t_env *wolf)
 {
 	SDL_RenderCopy(wolf->renderer, wolf->texture, NULL, NULL);
-    ft_set_SDL_minimap_colors(wolf);
+	ft_set_sdl_minimap_colors(wolf);
 	SDL_RenderPresent(wolf->renderer);
 }
 

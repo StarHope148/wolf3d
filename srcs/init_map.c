@@ -22,7 +22,8 @@ char	**ft_malloc_tab(t_env *wolf)
 	i = 0;
 	while (i < wolf->mapdata.nbl)
 	{
-		if (!(tab[i] = (char *)malloc(sizeof(char) * (wolf->mapdata.nbcol + 1))))
+		if (!(tab[i] = (char *)malloc(sizeof(char) *
+						(wolf->mapdata.nbcol + 1))))
 			return (NULL);
 		i++;
 	}

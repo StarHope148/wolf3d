@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 21:11:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 23:53:46 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.pos_x = 0;
 	wolf->cam.pos_y = 0;
 	wolf->cam.angle = PI / 2;
-	wolf->cam.fov = FOV;
+	wolf->cam.fov = PI / 3;
 	wolf->cam.strafe_left = 0;
 	wolf->cam.strafe_right = 0;
 	wolf->cam.forward = 0;
@@ -35,6 +35,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.rotate_right = 0;
 	wolf->precision = RAY_LENGHT;
 	wolf->switch_textures = NON_TEXTURED;
+	wolf->block = HEIGHT * 0.01;
 }
 
 void	ft_setspawn(t_env *wolf)

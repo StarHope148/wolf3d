@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/22 20:29:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 21:20:42 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void			ft_sdl(t_env *wolf)
 	ft_init_renderer_texture(wolf);
 	ft_load_surface(wolf, "textures/risitas_wall.bmp", &(wolf->surface_wall_north));
 	ft_load_surface(wolf, "textures/panda_wall.bmp", &(wolf->surface_wall_south));
-	ft_load_surface(wolf, "textures/purple_wall.bmp", &(wolf->surface_wall_east));
+	ft_load_surface(wolf, "textures/orange_wall.bmp", &(wolf->surface_wall_east));
 	ft_load_surface(wolf, "textures/green_wall.bmp", &(wolf->surface_wall_west));
 	ft_print(wolf);
 	ft_key_hook(wolf);

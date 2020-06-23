@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/22 13:44:48 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 21:22:55 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void        ft_settings(t_env *wolf)
 	{
 		wolf->precision += RAY_LENGHT_STEP;
 		printf("ray lenght = %f\n", wolf->precision);			//DEBUG
-
 	}
 	else if (wolf->event.key.keysym.sym == SDLK_x)
 	{
@@ -32,6 +31,17 @@ void        ft_settings(t_env *wolf)
 		printf("cam_x = %.2f\tcam_y = %.2f\n", wolf->cam.pos_x, wolf->cam.pos_y);	//DEBUG			
 		//printf("case = %c\n", wolf->mapdata.map[(int)wolf->cam.pos_y][(int)wolf->cam.pos_x]);
 		printf("angle = %f\n", wolf->cam.angle);
+	}
+	else if (wolf->event.key.keysym.sym == SDLK_SPACE)
+	{
+		if (wolf->switch_textures == NON_TEXTURED)
+			wolf->switch_textures = SHADED;
+		else if (wolf->switch_textures == SHADED)
+			wolf->switch_textures = COLOR_ORIENTED;
+		else if (wolf->switch_textures == COLOR_ORIENTED)
+			wolf->switch_textures = TEXTURED;
+		else if (wolf->switch_textures == TEXTURED)
+			wolf->switch_textures = NON_TEXTURED;
 	}
 }
 

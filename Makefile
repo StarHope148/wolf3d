@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/06/23 18:22:14 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/06/23 21:30:38 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,12 @@ SRC_NAME += init_map.c
 SRC_NAME += key_binding.c
 SRC_NAME += refresh_pos.c
 SRC_NAME += map_checker.c
+SRC_NAME += raycaster.c
+SRC_NAME += raycaster_tools.c
+SRC_NAME += sampling.c
+SRC_NAME += sampling_tools.c
+SRC_NAME += draw_textures.c
+SRC_NAME += minimap.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

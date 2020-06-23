@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 18:36:51 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 21:40:57 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ typedef enum	e_cardinal_point
 	WEST,
 	EAST
 }				t_cardinal_point;
+
+typedef enum	e_switch_texture_mod
+{
+	NON_TEXTURED,
+	SHADED,
+	COLOR_ORIENTED,
+	TEXTURED
+}				t_switch_texture_mod;
 
 typedef struct	s_map
 {
@@ -77,6 +85,17 @@ typedef struct s_calc
 	double test_angle;
 }				t_calc;
 
+typedef struct s_minimap
+{
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+	int		def_x;
+	int		def_y;
+	char	done;
+}				t_minimap;
+
 typedef struct	s_env
 {
 	SDL_Window 		*window;
@@ -97,9 +116,15 @@ typedef struct	s_env
 	Uint32			*pixels_wall_west;
 	t_raycast		raycast;
 	t_calc			calc;
+	t_minimap		minimap;
 	char			orientation;
 	double			precision;
+	char			switch_textures;
 	int				pitch;
+	int				ceiling;
+	int				floor;
+	unsigned int	tmp_x;
+	unsigned int	tmp_y;
 }				t_env;
 
 void		ft_wolf3d(char *mapfile);
@@ -117,5 +142,22 @@ void    	ft_error(int code, char *line);
 int			ft_check_line(char *line);
 int			ft_check_borders(char *line);
 void 		ft_norme(int code);
+void		ft_raycaster(t_env *wolf);
+void    	ft_calc_sampling_x(t_env *wolf);
+void		ft_west_face(t_env *wolf);
+void		ft_north_face(t_env *wolf);
+void		ft_south_face(t_env *wolf);
+void		ft_east_face(t_env *wolf);
+void		ft_fix_fisheye_distorsion(t_env *wolf);
+void		ft_set_ceiling_floor(t_env *wolf);
+void    	ft_draw_ceiling(t_env *wolf);
+void    	ft_draw_wall(t_env *wolf);
+void    	ft_apply_north_texture(t_env *wolf);
+void    	ft_apply_south_texture(t_env *wolf);
+void    	ft_apply_east_texture(t_env *wolf);
+void    	ft_apply_west_texture(t_env *wolf);
+void    	ft_draw_floor(t_env *wolf);
+void    	ft_draw_minimap(t_env *wolf);
+void    	ft_set_SDL_minimap_colors(t_env *wolf);
 
 #endif

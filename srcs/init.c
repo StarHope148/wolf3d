@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/22 20:23:12 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/23 21:11:12 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_init_env(t_env *wolf)
 	wolf->cam.rotate_left = 0;
 	wolf->cam.rotate_right = 0;
 	wolf->precision = RAY_LENGHT;
+	wolf->switch_textures = NON_TEXTURED;
 }
 
 void	ft_setspawn(t_env *wolf)

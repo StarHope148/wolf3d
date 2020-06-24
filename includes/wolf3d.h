@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 23:54:18 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/24 13:54:29 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,40 +128,40 @@ typedef struct	s_env
 	int				block;
 }				t_env;
 
-void				ft_wolf3d(char *mapfile);
-void				ft_sdl(t_env *wolf);
-void				ft_key_hook(t_env *wolf);
-void				ft_exit(t_env *wolf, int exit_type, char *message);
-void				ft_print(t_env *wolf);
-void				ft_initialize(t_env *wolf, char *mapfile);
-void				ft_init_map(t_env *wolf, char *mapfile);
-void				ft_movement(t_env *wolf);
-void				ft_stop_movement(t_env *wolf);
-void				ft_settings(t_env *wolf);
-void				ft_refresh_new_pos(t_env *wolf);
-void				ft_error(int code, char *line);
-int					ft_check_line(char *line);
-int					ft_check_borders(char *line);
-void				ft_norme(int code);
-void				ft_raycaster(t_env *wolf);
-void				ft_calc_sampling_x(t_env *wolf);
-void				ft_west_face(t_env *wolf);
-void				ft_north_face(t_env *wolf);
-void				ft_south_face(t_env *wolf);
-void				ft_east_face(t_env *wolf);
-void				ft_fix_fisheye_distorsion(t_env *wolf);
-void				ft_set_ceiling_floor(t_env *wolf);
-void				ft_draw_ceiling(t_env *wolf);
-void				ft_draw_wall(t_env *wolf);
-void				ft_apply_north_texture(t_env *wolf);
-void				ft_apply_south_texture(t_env *wolf);
-void				ft_apply_east_texture(t_env *wolf);
-void				ft_apply_west_texture(t_env *wolf);
-void				ft_draw_floor(t_env *wolf);
-void				ft_draw_minimap(t_env *wolf);
-void				ft_set_sdl_minimap_colors(t_env *wolf);
-void				ft_apply_textured_wall(t_env *wolf);
-void				ft_apply_color_oriented_wall(t_env *wolf);
-void				ft_apply_shaded_wall(t_env *wolf);
+void			ft_wolf3d(char *mapfile);
+void			ft_sdl(t_env *wolf);
+void			ft_key_hook(t_env *wolf);
+void			ft_exit(t_env *wolf, int exit_type, char *message);
+void			ft_print(t_env *wolf);
+void			ft_initialize(t_env *wolf, char *mapfile);
+void			ft_init_map(t_env *wolf, char *mapfile);
+void			ft_movement(t_env *wolf);
+void			ft_stop_movement(t_env *wolf);
+void			ft_settings(t_env *wolf);
+void			ft_refresh_new_pos(t_env *wolf);
+void			ft_error(int code, char *line);
+int				ft_check_line(char *line);
+int				ft_check_borders(char *line);
+void			ft_norme(int code);
+void			ft_raycaster(t_env *wolf);
+void			ft_calc_sampling_x(t_env *wolf);
+void			ft_west_face(t_env *wolf);
+void			ft_north_face(t_env *wolf);
+void			ft_south_face(t_env *wolf);
+void			ft_east_face(t_env *wolf);
+void			ft_fix_fisheye_distorsion(t_env *wolf);
+void			ft_set_ceiling_floor(t_env *wolf);
+void			ft_draw_ceiling(t_env *wolf);
+void			ft_draw_wall(t_env *wolf);
+void			ft_apply_north_texture(t_env *wolf);
+void			ft_apply_south_texture(t_env *wolf);
+void			ft_apply_east_texture(t_env *wolf);
+void			ft_apply_west_texture(t_env *wolf);
+void			ft_draw_floor(t_env *wolf);
+void			ft_draw_minimap(t_env *wolf);
+void			ft_set_sdl_minimap_colors(t_env *wolf);
+void			ft_apply_textured_wall(t_env *wolf);
+void			ft_apply_color_oriented_wall(t_env *wolf);
+void			ft_apply_shaded_wall(t_env *wolf);
 
 #endif

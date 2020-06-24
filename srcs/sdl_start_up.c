@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 17:25:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/24 21:25:32 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	ft_exit(t_env *wolf, int exit_type, char *message)
 {
-	if (wolf->screen_pixels != NULL)
-		free(wolf->screen_pixels);
+	
 	//if (wolf->pixels_wall_north != NULL)
 	//	free(wolf->pixels_wall_north);
 	//if (wolf->pixels_wall_south != NULL)
@@ -24,22 +23,48 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 	//	free(wolf->pixels_wall_east);
 	//if (wolf->pixels_wall_west != NULL)
 	//	free(wolf->pixels_wall_west);
-		
 
 	if (wolf->texture != NULL)
+	{
 		SDL_DestroyTexture(wolf->texture);
+		wolf->texture = NULL;
+	}
+	/* if (wolf->screen_pixels != NULL)
+	{
+		free(wolf->screen_pixels);
+		wolf->screen_pixels = NULL;
+	} */
 	if (wolf->surface_wall_north != NULL)
+	{
 		SDL_FreeSurface(wolf->surface_wall_north);
+		wolf->surface_wall_north = NULL;
+	}
 	if (wolf->surface_wall_south != NULL)
+	{
 		SDL_FreeSurface(wolf->surface_wall_south);
+		wolf->surface_wall_south = NULL;
+	}
 	if (wolf->surface_wall_east != NULL)
+	{
 		SDL_FreeSurface(wolf->surface_wall_east);
+		wolf->surface_wall_east = NULL;
+	}
 	if (wolf->surface_wall_west != NULL)
+	{
 		SDL_FreeSurface(wolf->surface_wall_west);
+		wolf->surface_wall_west = NULL;
+	}
+	
 	if (wolf->renderer != NULL)
+	{
 		SDL_DestroyRenderer(wolf->renderer);
+		wolf->renderer = NULL;
+	}
 	if (wolf->window != NULL)
+	{
 		SDL_DestroyWindow(wolf->window);
+		wolf->window = NULL;
+	}
 	SDL_Quit();
 	
 	if (wolf->mapdata.map != NULL)
@@ -51,8 +76,6 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 
 void	ft_init_window(t_env *wolf)
 {
-	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_Init() ");
 	wolf->window = SDL_CreateWindow("WOLF3D",
 					SDL_WINDOWPOS_CENTERED,
 					SDL_WINDOWPOS_CENTERED,
@@ -95,6 +118,8 @@ void	ft_load_surface(t_env *wolf, char *image_file, SDL_Surface **dest)
 
 void	ft_sdl(t_env *wolf)
 {
+	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_Init() ");
 	ft_init_window(wolf);
 	ft_init_renderer_texture(wolf);
 	ft_load_surface(wolf, "textures/risitas_wall.bmp",

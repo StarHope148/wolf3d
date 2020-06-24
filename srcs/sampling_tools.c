@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:05:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 16:08:37 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/24 21:21:25 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ void	ft_free_map(t_env *wolf)
 	int i;
 
 	i = 0;
-	while (i < wolf->mapdata.nbl)
+	while (i < wolf->mapdata.nbl && wolf->mapdata.map[i] != NULL)
 	{
-		if (wolf->mapdata.map[i] != NULL)
-			free(wolf->mapdata.map[i]);
+		free(wolf->mapdata.map[i]);
+		wolf->mapdata.map[i] = NULL;
 		i++;
 	}
+	free(wolf->mapdata.map);
+	wolf->mapdata.map = NULL;
 }
 
 void	ft_west_face(t_env *wolf)

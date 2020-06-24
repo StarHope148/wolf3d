@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 13:54:29 by czhang           ###   ########.fr       */
+/*   Updated: 2020/06/24 14:54:22 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,6 @@ void			ft_set_sdl_minimap_colors(t_env *wolf);
 void			ft_apply_textured_wall(t_env *wolf);
 void			ft_apply_color_oriented_wall(t_env *wolf);
 void			ft_apply_shaded_wall(t_env *wolf);
+void			ft_free_map(t_env *wolf);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 22:09:25 by czhang           ###   ########.fr       */
+/*   Updated: 2020/06/24 16:42:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ char	**ft_malloc_tab(t_env *wolf)
 	char	**tab;
 	int		i;
 
+	tab = NULL;
 	if ((tab = (char **)malloc(sizeof(char *) * wolf->mapdata.nbl)) == NULL)
 		return (NULL);
 	i = 0;
 	while (i < wolf->mapdata.nbl)
 	{
+		tab[i] = NULL;
 		if (!(tab[i] = (char *)malloc(sizeof(char) *
 						(wolf->mapdata.nbcol + 1))))
 			return (NULL);
@@ -64,8 +66,6 @@ void	ft_fill_map(t_env *wolf, int fd)
 	if (wolf->mapdata.nbl < 3 || wolf->mapdata.nbcol < 3)
 	{
 		ft_putendl_fd("wrong map format", 2);
-		if (line)
-			free(line);
 		exit(EXIT_FAILURE);
 	}
 }

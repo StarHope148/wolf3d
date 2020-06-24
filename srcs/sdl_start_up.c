@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 13:54:57 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/24 14:57:06 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 	if (wolf->window != NULL)
 		SDL_DestroyWindow(wolf->window);
 	SDL_Quit();
+	if (wolf->mapdata.map != NULL)
+		ft_free_map(wolf);
 	if (message != NULL)
 		perror(message);
 	exit(exit_type);

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 14:57:06 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/24 17:25:42 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 void	ft_exit(t_env *wolf, int exit_type, char *message)
 {
-	if (wolf->format != NULL)
-		SDL_FreeFormat(wolf->format);
+	if (wolf->screen_pixels != NULL)
+		free(wolf->screen_pixels);
+	//if (wolf->pixels_wall_north != NULL)
+	//	free(wolf->pixels_wall_north);
+	//if (wolf->pixels_wall_south != NULL)
+	//	free(wolf->pixels_wall_south);
+	//if (wolf->pixels_wall_east != NULL)
+	//	free(wolf->pixels_wall_east);
+	//if (wolf->pixels_wall_west != NULL)
+	//	free(wolf->pixels_wall_west);
+		
+
 	if (wolf->texture != NULL)
 		SDL_DestroyTexture(wolf->texture);
 	if (wolf->surface_wall_north != NULL)
@@ -31,6 +41,7 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 	if (wolf->window != NULL)
 		SDL_DestroyWindow(wolf->window);
 	SDL_Quit();
+	
 	if (wolf->mapdata.map != NULL)
 		ft_free_map(wolf);
 	if (message != NULL)
@@ -38,7 +49,7 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 	exit(exit_type);
 }
 
-void	ft_init_window_renderer(t_env *wolf)
+void	ft_init_window(t_env *wolf)
 {
 	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_Init() ");
@@ -84,7 +95,7 @@ void	ft_load_surface(t_env *wolf, char *image_file, SDL_Surface **dest)
 
 void	ft_sdl(t_env *wolf)
 {
-	ft_init_window_renderer(wolf);
+	ft_init_window(wolf);
 	ft_init_renderer_texture(wolf);
 	ft_load_surface(wolf, "textures/risitas_wall.bmp",
 					&(wolf->surface_wall_north));

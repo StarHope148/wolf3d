@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2019/12/03 16:09:18 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/24 21:33:17 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,15 @@ int		main(int ac, char **av)
 	ft_wolf3d(av[1]);
 	return (0);
 }
+
+/*
+**int		main(int ac, char **av)
+**{
+**	(void)ac;
+**	(void)av;
+**
+**	SDL_Init(SDL_INIT_VIDEO);
+**	SDL_Quit();
+**	return (0);
+**}
+*/

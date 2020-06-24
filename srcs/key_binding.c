@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:16:41 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 13:59:45 by czhang           ###   ########.fr       */
+/*   Updated: 2020/06/24 14:02:36 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void		ft_settings(t_env *wolf)
 {
 	if (wolf->event.key.keysym.sym == SDLK_KP_PLUS)
+	{
 		if (wolf->precision - RAY_LENGHT_STEP > 0)
 			wolf->precision -= RAY_LENGHT_STEP;
+	}
 	else if (wolf->event.key.keysym.sym == SDLK_KP_MINUS)
 		wolf->precision += RAY_LENGHT_STEP;
 	else if (wolf->event.key.keysym.sym == SDLK_SPACE)

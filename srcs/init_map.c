@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/25 19:27:54 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 23:57:28 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_fill_map(t_env *wolf, int fd)
 	int		i;
 
 	i = 0;
+	line = NULL;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		if (ft_check_line(line) < 0 || i++ == 0 || i == wolf->mapdata.nbl)
@@ -63,6 +64,7 @@ void	ft_fill_map(t_env *wolf, int fd)
 			ft_error(1, line);
 		ft_memdel((void **)&line);
 	}
+	ft_memdel((void **)&line);
 	if (wolf->mapdata.nbl < 3 || wolf->mapdata.nbcol < 3)
 	{
 		ft_putendl_fd("wrong map format", 2);
@@ -77,11 +79,14 @@ void	ft_count_lines_columns(t_env *wolf, char *mapfile, int fd)
 
 	if ((fd = open(mapfile, O_RDONLY)) < 0)
 		ft_norme(5);
+	line = NULL;
 	if ((get_next_line(fd, &line)) <= 0)
 		ft_error(6, line);
 	wolf->mapdata.nbcol = ft_strlen(line);
 	ft_memdel((void **)&line);
 	wolf->mapdata.nbl++;
+	if (wolf->mapdata.nbcol > 100)
+		ft_error(8, line);
 	while (get_next_line(fd, &line) > 0)
 	{
 		i = ft_strlen(line);
@@ -105,13 +110,13 @@ void	ft_init_map(t_env *wolf, char *mapfile)
 	ft_count_lines_columns(wolf, mapfile, fd);
 	if ((fd = open(mapfile, O_RDONLY)) < 0)
 	{
-		perror("Error during open() ");
+		ft_putendl_fd("Error during open() ", 2);
 		exit(EXIT_FAILURE);
 	}
 	ft_fill_map(wolf, fd);
 	if (close(fd) < 0)
 	{
-		perror("Error during close() ");
+		ft_putendl_fd("Error during close() ", 2);
 		exit(EXIT_FAILURE);
 	}
 }

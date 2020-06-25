@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/25 18:02:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 00:18:23 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 	if (wolf->mapdata.map != NULL)
 		ft_free_map(wolf);
 	if (message != NULL)
-		perror(message);
+		ft_putendl_fd(message, 2);
 	exit(exit_type);
 }
 
@@ -48,7 +48,7 @@ void	ft_init_window(t_env *wolf)
 					HEIGHT,
 					0);
 	if (wolf->window == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateWindow() ");
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateWindow()");
 }
 
 void	ft_init_renderer_texture(t_env *wolf)
@@ -57,14 +57,14 @@ void	ft_init_renderer_texture(t_env *wolf)
 										-1,
 										SDL_RENDERER_ACCELERATED);
 	if (wolf->renderer == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateRenderer() ");
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateRenderer()");
 	wolf->texture = SDL_CreateTexture(wolf->renderer,
 									SDL_PIXELFORMAT_RGBA8888,
 									SDL_TEXTUREACCESS_STREAMING,
 									WIDTH,
 									HEIGHT);
 	if (wolf->texture == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateTexture() ");
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_CreateTexture()");
 }
 
 void	ft_load_surface(t_env *wolf, char *image_file, SDL_Surface **dest)
@@ -74,17 +74,17 @@ void	ft_load_surface(t_env *wolf, char *image_file, SDL_Surface **dest)
 	tmp = NULL;
 	tmp = SDL_LoadBMP(image_file);
 	if (tmp == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_LoadBMP() ");
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_LoadBMP()");
 	*dest = SDL_ConvertSurfaceFormat(tmp, SDL_PIXELFORMAT_RGBA8888, 1);
 	SDL_FreeSurface(tmp);
 	if (*dest == NULL)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_ConvertSurfaceFormat() ");
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_ConvertSurfaceFormat()");
 }
 
 void	ft_sdl(t_env *wolf)
 {
 	if ((SDL_Init(SDL_INIT_VIDEO)) != 0)
-		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_Init() ");
+		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_Init()");
 	ft_init_window(wolf);
 	ft_init_renderer_texture(wolf);
 	ft_load_surface(wolf, "textures/risitas_wall.bmp",

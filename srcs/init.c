@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 11:55:03 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 17:25:48 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 00:01:36 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	ft_init_env(t_env *wolf)
 	wolf->precision = RAY_LENGHT;
 	wolf->switch_textures = NON_TEXTURED;
 	wolf->block = HEIGHT * 0.01;
+	wolf->surface_wall_north = NULL;
+	wolf->surface_wall_south = NULL;
+	wolf->surface_wall_east = NULL;
+	wolf->surface_wall_west = NULL;
 }
 
 void	ft_setspawn(t_env *wolf)

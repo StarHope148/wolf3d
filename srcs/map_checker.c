@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/06/25 19:28:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 23:15:00 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ void	ft_error(int code, char *line)
 	if (code == 4)
 		ft_putendl_fd("Your map is missing borders, BUILD THAT WALL", 2);
 	if (code == 5)
-		ft_putendl_fd("Error during open() ", 2);
+		ft_putendl_fd("Error during open()", 2);
 	if (code == 6)
 		ft_putendl_fd("map is empty", 2);
 	if (code == 7)
-		ft_putendl_fd("Error during close() ", 2);
+		ft_putendl_fd("Error during close()", 2);
+	if (code == 8)
+		ft_putendl_fd("Map is too big", 2);
 	ft_memdel((void **)&line);
 	exit(EXIT_FAILURE);
 }

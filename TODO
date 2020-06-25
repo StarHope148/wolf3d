@@ -1,8 +1,6 @@
 ### TODO ###
 
 - clean the code and norm everything
-- check /dev/null and /dev/random files
-- check for 641 allocations leaks and 131049 bytes (jcanteau got only 38 allocations leaks on VM)
 - SDL_LoadBMP() might not be authorized by the rules --> need to think about it
 _______________________________________________________
 
@@ -27,6 +25,10 @@ _______________________________________________________
 	}
 - need to compile the SDL during/before "make" command
 	for example adding "sudo apt-get install libsdl2-dev" in Makefile
+- check /dev/null and /dev/random files
+- check for 641 allocations leaks and 131049 bytes (jcanteau got only 38 allocations leaks on VM)
+	|
+	\-------> LAST LEAKS COME FROM SDL !
 _______________________________________________________
 
 ### DISCARDED ###

@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/06/25 16:37:16 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/06/25 22:26:05 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/.
+	sudo apt-get install libsdl2-dev
 	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) `sdl2-config --cflags --libs` -lm
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)

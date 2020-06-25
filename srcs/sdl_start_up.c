@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/25 13:22:30 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 18:02:49 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,49 +24,13 @@ void	ft_exit(t_env *wolf, int exit_type, char *message)
 	//if (wolf->pixels_wall_west != NULL)
 	//	free(wolf->pixels_wall_west);
 
+	ft_free_surface_image(wolf);
 
 	//if (wolf->screen_pixels != NULL)
 	//	ft_memdel((void **)&wolf->screen_pixels);
-	if (wolf->texture != NULL)
-	{
-		SDL_DestroyTexture(wolf->texture);
-		wolf->texture = NULL;
-	}
-	
-	if (wolf->surface_wall_north != NULL)
-	{
-		SDL_FreeSurface(wolf->surface_wall_north);
-		wolf->surface_wall_north = NULL;
-	}
-	if (wolf->surface_wall_south != NULL)
-	{
-		SDL_FreeSurface(wolf->surface_wall_south);
-		wolf->surface_wall_south = NULL;
-	}
-	if (wolf->surface_wall_east != NULL)
-	{
-		SDL_FreeSurface(wolf->surface_wall_east);
-		wolf->surface_wall_east = NULL;
-	}
-	if (wolf->surface_wall_west != NULL)
-	{
-		SDL_FreeSurface(wolf->surface_wall_west);
-		wolf->surface_wall_west = NULL;
-	}
-	
-	if (wolf->renderer != NULL)
-	{
-		SDL_DestroyRenderer(wolf->renderer);
-		wolf->renderer = NULL;
-	}
-	if (wolf->window != NULL)
-	{
-		SDL_DestroyWindow(wolf->window);
-		wolf->window = NULL;
-	}
-	
-	
-	SDL_Quit();	
+
+	ft_destroy_texture_renderer_window(wolf);
+	SDL_Quit();
 	
 	if (wolf->mapdata.map != NULL)
 		ft_free_map(wolf);

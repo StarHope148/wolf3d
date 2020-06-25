@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 17:25:56 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:42:19 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,7 @@ void			ft_apply_textured_wall(t_env *wolf);
 void			ft_apply_color_oriented_wall(t_env *wolf);
 void			ft_apply_shaded_wall(t_env *wolf);
 void			ft_free_map(t_env *wolf);
+void			ft_free_surface_image(t_env *wolf);
+void			ft_destroy_texture_renderer_window(t_env *wolf);
 
 #endif

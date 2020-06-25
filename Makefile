@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/06/24 21:01:54 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/06/25 16:37:16 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_NAME += sampling_tools.c
 SRC_NAME += draw_textures.c
 SRC_NAME += minimap.c
 SRC_NAME += switch_textures.c
+SRC_NAME += freeing.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

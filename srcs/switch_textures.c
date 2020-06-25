@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 23:15:33 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 00:01:42 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 18:26:29 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	ft_apply_shaded_wall(t_env *wolf)
 {
 	wolf->screen_pixels[wolf->raycast.y_render *
 			WIDTH + wolf->raycast.x_render] =
-				rgba_to_uint32(255 * wolf->raycast.shading,
+				ft_rgba_to_uint32(255 * wolf->raycast.shading,
 				255 * wolf->raycast.shading, 255 * wolf->raycast.shading, 0);
 }

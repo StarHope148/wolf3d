@@ -6,26 +6,11 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 20:05:08 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 21:44:45 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:37:06 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void	ft_free_map(t_env *wolf)
-{
-	int i;
-
-	i = 0;
-	while (i < wolf->mapdata.nbl && wolf->mapdata.map[i] != NULL)
-	{
-		free(wolf->mapdata.map[i]);
-		wolf->mapdata.map[i] = NULL;
-		i++;
-	}
-	free(wolf->mapdata.map);
-	wolf->mapdata.map = NULL;
-}
 
 void	ft_west_face(t_env *wolf)
 {

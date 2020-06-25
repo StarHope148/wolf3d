@@ -1,7 +1,8 @@
 ### TODO ###
 
 - clean the code and norm everything
-
+- check /dev/null and /dev/random files
+- check for 639 allocations leaks and 131049 bytes
 _______________________________________________________
 
 ### DONE ###

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/24 16:42:49 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 19:27:54 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_fill_map(t_env *wolf, int fd)
 		}
 		if (ft_retrieve_data(wolf, line) == -1)
 			ft_error(1, line);
-		free(line);
+		ft_memdel((void **)&line);
 	}
 	if (wolf->mapdata.nbl < 3 || wolf->mapdata.nbcol < 3)
 	{
@@ -80,7 +80,7 @@ void	ft_count_lines_columns(t_env *wolf, char *mapfile, int fd)
 	if ((get_next_line(fd, &line)) <= 0)
 		ft_error(6, line);
 	wolf->mapdata.nbcol = ft_strlen(line);
-	free(line);
+	ft_memdel((void **)&line);
 	wolf->mapdata.nbl++;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -91,7 +91,7 @@ void	ft_count_lines_columns(t_env *wolf, char *mapfile, int fd)
 			ft_error(2, line);
 		}
 		wolf->mapdata.nbl++;
-		free(line);
+		ft_memdel((void **)&line);
 	}
 	if (close(fd) < 0)
 		ft_error(7, line);

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 13:03:25 by vduvinag          #+#    #+#             */
-/*   Updated: 2020/06/24 16:29:43 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/25 19:28:30 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	ft_error(int code, char *line)
 		ft_putendl_fd("map is empty", 2);
 	if (code == 7)
 		ft_putendl_fd("Error during close() ", 2);
-	if (line != NULL)
-		free(line);
+	ft_memdel((void **)&line);
 	exit(EXIT_FAILURE);
 }
 

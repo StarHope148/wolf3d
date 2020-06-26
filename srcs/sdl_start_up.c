@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 14:10:29 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 00:18:23 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 17:05:51 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,9 @@
 
 void	ft_exit(t_env *wolf, int exit_type, char *message)
 {
-	
-	//if (wolf->pixels_wall_north != NULL)
-	//	free(wolf->pixels_wall_north);
-	//if (wolf->pixels_wall_south != NULL)
-	//	free(wolf->pixels_wall_south);
-	//if (wolf->pixels_wall_east != NULL)
-	//	free(wolf->pixels_wall_east);
-	//if (wolf->pixels_wall_west != NULL)
-	//	free(wolf->pixels_wall_west);
-
 	ft_free_surface_image(wolf);
-
-	//if (wolf->screen_pixels != NULL)
-	//	ft_memdel((void **)&wolf->screen_pixels);
-
 	ft_destroy_texture_renderer_window(wolf);
 	SDL_Quit();
-	
 	if (wolf->mapdata.map != NULL)
 		ft_free_map(wolf);
 	if (message != NULL)

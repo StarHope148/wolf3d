@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 14:53:23 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 00:41:15 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:56:53 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ int		main(int ac, char **av)
 	return (0);
 }
 
-
 /*
 **  int		main(int ac, char **av)
 **  {
 **  	SDL_Window		*test_window;
 **  	SDL_Renderer	*test_renderer;
 **  	SDL_Texture		*test_texture;
-** 
+**
 **  	(void)ac;
 **  	(void)av;
 **  	SDL_Init(SDL_INIT_VIDEO);

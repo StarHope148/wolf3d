@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:04:06 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 00:38:54 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:55:45 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	ft_pixel_access_bmp_images(t_env *wolf)
 void	ft_print(t_env *wolf)
 {
 	void	*tmp;
-	
+
 	if ((SDL_LockTexture(wolf->texture, NULL, &tmp,
 					&(wolf->pitch))) < 0)
 		ft_exit(wolf, EXIT_FAILURE, "Error in SDL_LockTexture()");
 	wolf->screen_pixels = tmp;
- 	ft_pixel_access_bmp_images(wolf);
+	ft_pixel_access_bmp_images(wolf);
 	ft_raycaster(wolf);
 	ft_draw_minimap(wolf);
 	SDL_UnlockTexture(wolf->texture);

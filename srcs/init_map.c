@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 12:01:07 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/25 23:57:28 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:58:47 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	ft_fill_map(t_env *wolf, int fd)
 void	ft_count_lines_columns(t_env *wolf, char *mapfile, int fd)
 {
 	char	*line;
-	int		i;
 
 	if ((fd = open(mapfile, O_RDONLY)) < 0)
 		ft_norme(5);
@@ -89,8 +88,7 @@ void	ft_count_lines_columns(t_env *wolf, char *mapfile, int fd)
 		ft_error(8, line);
 	while (get_next_line(fd, &line) > 0)
 	{
-		i = ft_strlen(line);
-		if (wolf->mapdata.nbcol != i)
+		if (wolf->mapdata.nbcol != (int)ft_strlen(line))
 		{
 			close(fd);
 			ft_error(2, line);

@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 23:15:33 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/26 19:56:02 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 20:09:42 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	ft_apply_color_oriented_wall(t_env *wolf)
 void	ft_apply_shaded_wall(t_env *wolf)
 {
 	wolf->raycast.shading = 1 - wolf->raycast.distance_towall / SHADING_DEPTH;
-	if (wolf->raycast.shading < 0)
-		wolf->raycast.shading = 0;
+	if (wolf->raycast.shading < 0.1)
+		wolf->raycast.shading = 0.1;
 	wolf->screen_pixels[wolf->raycast.y_render *
 			WIDTH + wolf->raycast.x_render] =
 				ft_rgba_to_uint32(255 * wolf->raycast.shading,

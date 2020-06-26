@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:41:09 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/25 13:03:48 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 22:45:07 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,25 @@ void	ft_key_pressed(t_env *wolf)
 {
 	if (wolf->event.key.keysym.sym == SDLK_ESCAPE)
 		ft_exit(wolf, EXIT_SUCCESS, NULL);
-	else if (wolf->event.key.keysym.sym == SDLK_w ||
-			wolf->event.key.keysym.sym == SDLK_a ||
-			wolf->event.key.keysym.sym == SDLK_s ||
-			wolf->event.key.keysym.sym == SDLK_d ||
-			wolf->event.key.keysym.sym == SDLK_RIGHT ||
-			wolf->event.key.keysym.sym == SDLK_LEFT)
-		ft_movement(wolf);
-	else if (wolf->event.key.keysym.sym == SDLK_KP_PLUS ||
-			wolf->event.key.keysym.sym == SDLK_KP_MINUS ||
-			wolf->event.key.keysym.sym == SDLK_SPACE)
-		ft_settings(wolf);
+	ft_movement(wolf);
+	ft_settings(wolf);
 }
 
 void	ft_key_hook(t_env *wolf)
 {
 	while (1)
 	{
-		SDL_PollEvent(&wolf->event);
-		if (wolf->event.type == SDL_KEYDOWN)
-			ft_key_pressed(wolf);
-		if (wolf->event.type == SDL_KEYUP)
-			ft_key_released(wolf);
-		else if (wolf->event.type == SDL_QUIT)
-			ft_exit(wolf, EXIT_SUCCESS, NULL);
+		while (SDL_PollEvent(&wolf->event))
+		{
+			if (wolf->event.type == SDL_MOUSEMOTION)
+				continue;
+			if (wolf->event.type == SDL_KEYDOWN)
+				ft_key_pressed(wolf);
+			if (wolf->event.type == SDL_KEYUP)
+				ft_key_released(wolf);
+			if (wolf->event.type == SDL_QUIT)
+				ft_exit(wolf, EXIT_SUCCESS, NULL);
+		}
 		ft_refresh_new_pos(wolf);
 		ft_print(wolf);
 	}

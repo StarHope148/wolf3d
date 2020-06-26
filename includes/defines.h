@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:18:53 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 23:54:31 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 20:04:29 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # define MAX_DEPTH 20
 # define RAY_LENGHT 0.01
 # define RAY_LENGHT_STEP 0.005
-# define SHADING_DEPTH 0.05
+# define SHADING_DEPTH 10
 # define WALL_SIZE 0.5
 
-# define MOVE_SPEED 0.025
-# define ROTATE_SPEED 0.025
+# define MOVE_SPEED 0.035
+# define ROTATE_SPEED 0.05
 
 # define WALL '#'
 # define EMPTY '.'

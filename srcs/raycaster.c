@@ -6,7 +6,7 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 19:51:13 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/23 23:24:53 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/26 19:54:09 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 void	ft_casting_ray(t_env *wolf)
 {
 	wolf->raycast.distance_towall += wolf->precision;
-	wolf->raycast.shading -= RAY_LENGHT * SHADING_DEPTH;
-	if (wolf->raycast.shading < 0)
-		wolf->raycast.shading = 0;
 	wolf->raycast.test_x = (int)(wolf->cam.pos_x +
 							wolf->raycast.eye_x *
 							wolf->raycast.distance_towall);

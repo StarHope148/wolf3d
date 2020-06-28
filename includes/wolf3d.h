@@ -6,14 +6,14 @@
 /*   By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:34:34 by jcanteau          #+#    #+#             */
-/*   Updated: 2020/06/25 16:42:19 by jcanteau         ###   ########.fr       */
+/*   Updated: 2020/06/28 21:43:54 by jcanteau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-# include "../SDL2/include/SDL2/SDL.h"
+# include "../SDL2-2.0.12/include/SDL.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>

@@ -6,7 +6,7 @@
 #    By: jcanteau <jcanteau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/02 11:22:48 by jcanteau          #+#    #+#              #
-#    Updated: 2020/06/25 22:58:15 by jcanteau         ###   ########.fr        #
+#    Updated: 2020/06/28 21:56:32 by jcanteau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 
 #FRAMEWORK = -framework OpenGL -framework AppKit
 #MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
-SDL2 = -I SDL2/include -L SDL2/lib -l SDL2-2.0.0
+SDL2 = -l SDL2
+# `sdl2-config --cflags --libs`
 CFLAGS = -Wall -Wextra -Werror
 NORMINETTE = ~/.norminette/norminette.rb
 
@@ -61,14 +62,16 @@ $(CC) = gcc
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) compile_sdl2
 	make -C libft/.
-	sudo apt-get install libsdl2-dev
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) `sdl2-config --cflags --libs` -lm
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) -lm
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
 	mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< 
+
+compile_sdl2 :
+	./compile_SDL2.sh
 
 clean:
 	make clean -C $(LIB_PATH)
@@ -76,22 +79,21 @@ clean:
 
 fclean: clean debug_clean
 	$(RM) $(LIB)
-	$(RM) $(NAME) $(NAME).ubuntu
+	$(RM) $(NAME)
+
+reset_SDL2:
+	$(RM) SDL2-2.0.12/Makefile
 
 re: fclean all
 
-debug:
+debug: compile_sdl2
 	make -C $(LIB_PATH)
-	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) `sdl2-config --cflags --libs` -lm
+	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) -lm
 
 debug_clean:
 	$(RM) -rf a.out a.out.DSYM
 	
 norm:
 	$(NORMINETTE) $(SRC) $(HEAD) $(LIB_PATH)
-
-ubuntu: $(OBJ)
-	make -C $(LIB_PATH)
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2)
 
 .PHONY: clean fclean re all debug debug_clean norm ubuntu

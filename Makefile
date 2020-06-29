@@ -72,11 +72,11 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
 	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< 
 
 $(COMPILE_SDL2) :
+	sudo apt-get install freeglut3-dev
 	(cd SDL2-2.0.12 \
 	&& ./configure --prefix=$(shell pwd)/SDL2 --enable-static --disable-shared \
 	&& make \
 	&& make install)
-	sudo apt-get install freeglut3-dev
 
 clean:
 	make clean -C $(LIB_PATH)
@@ -89,7 +89,7 @@ fclean: clean debug_clean
 reset_SDL2:
 	$(RM) -r SDL2
 
-re: fclean all
+re: fclean reset_SDL2 all
 
 debug: $(COMPILE_SDL2)
 	make -C $(LIB_PATH)

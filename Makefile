@@ -52,26 +52,31 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 #FRAMEWORK = -framework OpenGL -framework AppKit
 #MLXFLAG = -I /usr/local/include -L /usr/local/lib -lmlx
 SDL2 = -l SDL2
+COMPILE_SDL2 = SDL2/lib/libSDL2.a
 # `sdl2-config --cflags --libs`
 CFLAGS = -Wall -Wextra -Werror
 NORMINETTE = ~/.norminette/norminette.rb
 
-$(CC) = gcc
+$(CC) = clang
 
 ###############################################################################
 
 all: $(NAME)
 
-$(NAME): $(OBJ) compile_sdl2
+$(NAME): $(OBJ) $(COMPILE_SDL2)
 	make -C libft/.
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) -lm
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD)
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD) 
 	mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) -I $(INC_PATH) -o $@ -c $< 
 
-compile_sdl2 :
-	./compile_SDL2.sh
+$(COMPILE_SDL2) :
+	(cd SDL2-2.0.12 \
+	&& ./configure --prefix=$(shell pwd)/SDL2 --enable-static --disable-shared \
+	&& make \
+	&& make install)
+	sudo apt-get install freeglut3-dev
 
 clean:
 	make clean -C $(LIB_PATH)
@@ -82,13 +87,13 @@ fclean: clean debug_clean
 	$(RM) $(NAME)
 
 reset_SDL2:
-	$(RM) SDL2-2.0.12/Makefile
+	$(RM) -r SDL2
 
 re: fclean all
 
-debug: compile_sdl2
+debug: $(COMPILE_SDL2)
 	make -C $(LIB_PATH)
-	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) -lm
+	$(CC) -g3 -fsanitize=address,undefined $(CFLAGS) -I $(INC_PATH) $(SRC) $(LIB) $(SDL2) $(shell ./SDL2/bin/sdl2-config --cflags --libs) -lm
 
 debug_clean:
 	$(RM) -rf a.out a.out.DSYM

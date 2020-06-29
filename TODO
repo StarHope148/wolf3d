@@ -1,7 +1,5 @@
 ### TODO ###
 
-- clean the code and norm everything
-- SDL_LoadBMP() might not be authorized by the rules --> need to think about it
 _______________________________________________________
 
 ### DONE ###
@@ -29,8 +27,11 @@ _______________________________________________________
 - check for 641 allocations leaks and 131049 bytes (jcanteau got only 38 allocations leaks on VM)
 	|
 	\-------> LAST LEAKS COME FROM SDL !
+- clean the code and norm everything
+- fixed matching render driver issue in VM with freeglut3-dev package
 _______________________________________________________
 
 ### DISCARDED ###
 
 - add smooth sliding while colliding on walls depending of angle
+- SDL_LoadBMP() might not be authorized by the rules --> need to think about it
